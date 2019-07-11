@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="App_Theme_no_statebar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+        <!--<item name="toolbarNavigationButtonStyle">@style/myToolbarNavigationButtonStyle</item>-->
+        <item name="colorPrimary">#ffffff</item>
+        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorAccent">@color/colors_0293ff</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="actionMenuTextColor">@drawable/tool_bar_text_color</item>
+        <item name="toolbar_navigationIcon">@mipmap/ic_back_black</item>
+        <item name="toolbar_title_textcolor">@android:color/black</item>
+        <item name="android:textViewStyle">@style/BaseTextView</item>
+        <item name="android:buttonStyle">@style/btn_bottom_single</item>
+        <item name="android:editTextStyle">@style/edit_base</item>
+        <item name="buttonTextColor">@color/colors_0293ff</item>
+        <item name="buttonBg">@color/colors_0293ff</item>
+        <item name="buttonBgClick">@color/colors_0293ff</item>
+        <item name="buttonBgEnable">@color/colors_b3</item>
+        <item name="buttonBarPositiveButtonStyle">@style/positiveBtnStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/negativeBtnstyle</item>
+    </style>
+
+    <style name="App_Theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+        <!--<item name="toolbarNavigationButtonStyle">@style/myToolbarNavigationButtonStyle</item>-->
+        <item name="colorPrimary">#ffffff</item>
+        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorAccent">@color/colors_0293ff</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="actionMenuTextColor">@drawable/tool_bar_text_color</item>
+        <item name="toolbar_navigationIcon">@mipmap/ic_back_black</item>
+        <item name="toolbar_title_textcolor">@android:color/black</item>
+        <item name="android:textViewStyle">@style/BaseTextView</item>
+        <item name="android:buttonStyle">@style/btn_bottom_single</item>
+        <item name="android:editTextStyle">@style/edit_base</item>
+        <item name="buttonTextColor">@color/blue</item>
+        <item name="buttonBg">@color/colors_0293ff</item>
+        <item name="buttonBgClick">@color/colors_0293ff</item>
+        <item name="buttonBgEnable">@color/colors_0293ff</item>
+        <item name="buttonBarPositiveButtonStyle">@style/positiveBtnStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/negativeBtnstyle</item>
+    </style>
+    <style name="wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="match">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="match_wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 高度 48dp-->
+    <!-- 高度 48dp-->
+    <style name="match_48p">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/heigt_edit</item>
+    </style>
+    <!-- 左右边距16dp -->
+    <style name="match_wrap_margin_distance_bg" parent="match_wrap">
+        <item name="android:layout_marginLeft">@dimen/distance_bg</item>
+        <item name="android:layout_marginRight">@dimen/distance_bg</item>
+    </style>
+    <!-- 左右边距16dp -->
+    <!-- 左右边距16dp  上边距10dp-->
+    <!-- 左右边距16dp -->
+    <!-- 左右边距16dp -->
+    <!-- 左右边距16dp  上边距10dp-->
+    <!-- textview  -->
+    <style name="BaseTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/colors_a2</item>
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="android:drawablePadding">@dimen/distance_drawablePadding</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+    <!-- -->
+
+    <!--edit 输入框 基本样式-->
+    <style name="edit_base" parent="match_48p">
+        <item name="android:background">@drawable/slt_edt_common</item>
+        <item name="android:drawablePadding">@dimen/distance_drawablePadding</item>
+        <item name="android:textColor">@color/colors_d4</item>
+        <item name="android:textSize">@dimen/t3</item>
+        <item name="android:textColorHint">@color/colors_d4</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <!--edit 输入框  -->
+    <!-- 按钮 基本样式-->
+    <style name="btn_base" parent="@android:style/Widget.Button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/t4</item>
+        <item name="android:padding">@dimen/distance_drawablePadding</item>
+    </style>
+    <!--底部按钮 -渐变 -->
+    <style name="btn_bottom_single_gradual" parent="btn_base">
+        <item name="android:background">@drawable/slt_btn_button_gradual</item>
+        <item name="android:textColor">@color/colors_a5</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+    <!--底部按钮 -方形  -->
+    <!--底部按钮 -渐变 -->
+    <!-- 小按钮-->
+    <!--底部按钮 -->
+    <style name="btn_bottom_single" parent="btn_base">
+        <item name="android:background">@drawable/slt_btn_bottom</item>
+        <item name="android:textColor">@color/colors_a5</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+    <!--底部按钮 有边距-->
+    <!--按钮 描边-->
+    <style name="btn_bottom_stroke" parent="btn_base">
+        <item name="android:background">@drawable/slt_btn_bottom_stroke</item>
+        <item name="android:textColor">@color/btn_small_stroke</item>
+    </style>
+    <!--小按钮 基本样式 -->
+    <style name="btn_small_base" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/t2</item>
+    </style>
+    <!-- 小按钮-->
+    <!-- 小按钮 登录-->
+    <style name="btn_small_stroke_login" parent="btn_small_base">
+        <item name="android:background">@drawable/slt_btn_small_stroke_login</item>
+        <item name="android:textColor">@color/btn_small_stroke</item>
+    </style>
+    <!-- 小按钮 描边-->
+    <!-- 文字按键 -->
+    <!-- 警示按键 红色-->
+    <!-- textview -->
+    <style name="textview_T4A1" parent="wrap">
+        <item name="android:textColor">@color/colors_a1</item>
+        <item name="android:textSize">@dimen/t4</item>
+        <item name="android:drawablePadding">@dimen/distance_drawablePadding</item>
+    </style>
+    <!-- textview 宽度全屏-->
+    <!-- 左边有蓝色方块-->
+    <style name="textview_T2A2" parent="wrap">
+        <item name="android:textColor">@color/colors_a2</item>
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="android:drawablePadding">@dimen/distance_drawablePadding</item>
+    </style>
+    <!-- 宽度全屏-->
+    <!-- 宽度全屏 有左右边距-->
+
+    <!-- 左边有 xin 图片-->
+    <!-- 两边距 16dp-->
+    <!-- 右边 有下一页图片-->
+    <!-- 宽度 全屏 -->
+    <style name="textview_T2B1" parent="wrap">
+        <item name="android:textColor">@color/colors_b1</item>
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="android:drawablePadding">@dimen/distance_drawablePadding</item>
+    </style>
+    <!-- 右边 有下一页图片-->
+
+    <!-- 搜索-->
+    <!--主页底部tab-->
+    <style name="tab_bottom">
+        <item name="android:drawablePadding">@dimen/tab_bottom_drawablePadding</item>
+        <item name="android:paddingBottom">@dimen/tab_bottom_drawablePadding</item>
+        <item name="android:paddingTop">@dimen/tab_bottom_top</item>
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="android:textColor">@color/tab_bottom_text_color</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 画线 -->
+    <!-- 画线 -->
+    <!-- 画线 10dp 高度-->
+    <!-- 画线 距离左右边距16dp-->
+    <!-- 画线 距离左边距16dp-->
+
+
+    <!-- 订单 详情 提示-->
+    <!-- 订单 详情 高度48dp-->
+    <!-- 订单详情 T3A1 文字-->
+    <!-- 订单详情 金额 文字-->
+    <!-- 添加投资者顶部提示-->
+    <!-- 添加投资者 dot -->
+    <!--  五角星-->
+    <!-- 全屏 显示 在右边-->
+    <!--添加投资者 顶部提示 -->
+    <!-- 消息中心 -->
+    <!--消息红点-->
+    <!-- 图片大小 40dp-->
+    <!-- 图片大小 40dp 有左右边距-->
+    <!-- 清除 图片 -->
+    <!-- 下一页图片-->
+    <!--有白色背景 -->
+    <!--有左右边距-->
+    <!--白色背景 左右边距-->
+    <!-- 白色背景-->
+    <!-- 白色背景-->
+    <!--白色背景 左右边距-->
+    <!--底部按键-->
+    <!-- 顶部tablayout-->
+    <style name="AnimationActivity" parent="@android:style/Animation.Activity">
+        <!--用于设置打开新的Activity并进入新的Activity展示的动画-->
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <!--用于设置打开新的Activity并销毁之前的Activity展示的动画-->
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <!--用于设置关闭当前Activity进入上一个Activity展示的动画-->
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <!--用于设置关闭当前Activity时展示的动画-->
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+</resources>

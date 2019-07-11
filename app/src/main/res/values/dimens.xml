@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--字号-->
+    <!--大标题-->
+    <!--一般文字大小-->
+    <!--UI上面提示性文字-->
+
+    <!--距离-->
+    <dimen name="distance_10dp">10dp</dimen>
+    <dimen name="distance_15dp">15dp</dimen>
+    <!--大图显示大小-->
+    <dimen name="tv15">15sp</dimen>
+
+</resources>

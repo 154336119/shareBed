@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- 弹出框样式 -->
+    <style name="ToolbarFragmentTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="actionMenuTextColor">#ffffff</item> <!--  敲定颜色-->
+    </style>
+</resources>

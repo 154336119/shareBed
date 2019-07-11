@@ -1,0 +1,55 @@
+<resources>
+<string name="app_name">工厂联盟</string>
+    <!--注册-->
+    <string name="enter_the_validation_code">获取验证码</string>
+    <!--登录-->
+    <string name="sign_in">登录</string>
+    <!--修改密码-->
+    <!--主页面-->
+
+    <!--扫描故障码-->
+    <!--冻结帧-->
+    <!--设置-->
+<string name="Settings">设置</string>
+    <!--修改昵称-->
+    <!--故障灯-->
+
+
+    <!--邮箱验证-->
+
+
+    <!--冻结桢-->
+
+    <!--氧气传感器--><![CDATA[
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+string>
+
+    ]]>
+    <string name="please_install_weixin">您手机未安装微信客户端，请先安装</string>
+
+
+</resources>
