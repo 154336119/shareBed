@@ -92,7 +92,7 @@
     <style name="edit_base" parent="match_48p">
         <item name="android:background">@drawable/slt_edt_common</item>
         <item name="android:drawablePadding">@dimen/distance_drawablePadding</item>
-        <item name="android:textColor">@color/colors_d4</item>
+        <item name="android:textColor">@color/colors_3f403f</item>
         <item name="android:textSize">@dimen/t3</item>
         <item name="android:textColorHint">@color/colors_d4</item>
         <item name="android:textCursorDrawable">@null</item>
