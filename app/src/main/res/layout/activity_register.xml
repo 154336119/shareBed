@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dp_40"
+        android:text="注册"
+        android:textStyle="bold"
+        android:textColor="@color/color_131313"
+        android:layout_marginTop="@dimen/distance_20"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_b5b5b5"
+        android:layout_marginTop="10dp"
+        android:text="手机号绑定成功后，您可以使用手机号直接登录" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_b5b5b5"
+            android:text="手机号码" />
+
+        <EditText
+            android:id="@+id/edtMobile"
+            style="@style/edit_base"
+            android:completionThreshold="1"
+            android:hint="请输入手机号码"
+            android:lines="1"
+            android:drawablePadding="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_b5b5b5"
+            android:text="验证码"
+            android:layout_marginTop="30dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edtVCode"
+                style="@style/edit_base"
+                android:completionThreshold="1"
+                android:hint="请输入验证码"
+                android:lines="1"
+                android:drawablePadding="5dp"/>
+
+            <com.slb.sharebed.weight.CountTimerButton
+                android:id="@+id/BtnGetCode"
+                style="@style/btn_small_stroke_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right|center_vertical"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/distance_15dp"
+                android:paddingRight="@dimen/distance_15dp"
+                android:text="@string/enter_the_validation_code" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/wanchengzhuce"
+            android:layout_marginTop="60dp"/>
+    </LinearLayout>
+</LinearLayout>

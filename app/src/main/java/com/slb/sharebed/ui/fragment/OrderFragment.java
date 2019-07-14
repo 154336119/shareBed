@@ -36,7 +36,7 @@ import butterknife.Unbinder;
 
 import static com.slb.sharebed.MyConstants.url_token;
 
-public class ShopCarFragment extends BaseFragment {
+public class OrderFragment extends BaseFragment {
     Unbinder unbinder;
     @BindView(R.id.webView)
     WebView mWebView;
@@ -45,14 +45,14 @@ public class ShopCarFragment extends BaseFragment {
     @BindView(R.id.root)
     FrameLayout root;
 
-    public static ShopCarFragment newInstance() {
-        ShopCarFragment fragment = new ShopCarFragment();
+    public static OrderFragment newInstance() {
+        OrderFragment fragment = new OrderFragment();
         return fragment;
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_shopcar;
+        return R.layout.fragment_order;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -154,7 +154,7 @@ public class ShopCarFragment extends BaseFragment {
             }
         });
         mWebView.addJavascriptInterface(new JavaScriptObject(), "jsAndroid");
-        mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_gouwuche + Base.getUserEntity().getToken());
+//        mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_gouwuche + Base.getUserEntity().getToken());
         return rootView;
     }
 
@@ -220,19 +220,19 @@ public class ShopCarFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_gouwuche + Base.getUserEntity().getToken());
-        }
-    }
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-       if(isVisibleToUser){
-           mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_gouwuche + Base.getUserEntity().getToken());
-       }
-    }
+//    @Override
+//    public void onHiddenChanged(boolean hidden) {
+//        super.onHiddenChanged(hidden);
+//        if (!hidden) {
+//            mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_gouwuche + Base.getUserEntity().getToken());
+//        }
+//    }
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//       if(isVisibleToUser){
+//           mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_gouwuche + Base.getUserEntity().getToken());
+//       }
+//    }
 
 
 }

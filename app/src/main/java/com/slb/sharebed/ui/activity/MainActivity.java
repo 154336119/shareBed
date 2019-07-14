@@ -13,7 +13,8 @@ import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
 import com.slb.sharebed.http.bean.UpdateEntity;
 import com.slb.sharebed.ui.contract.MainContract;
-import com.slb.sharebed.ui.fragment.ShopCarFragment;
+import com.slb.sharebed.ui.fragment.MoneyFragment;
+import com.slb.sharebed.ui.fragment.OrderFragment;
 import com.slb.sharebed.ui.presenter.MainPresenter;
 import com.slb.sharebed.util.ExitDoubleClick;
 import com.slb.frame.http2.exception.ResponseExceptionEventArgs;
@@ -32,8 +33,9 @@ public class MainActivity  extends BaseMvpActivity<MainContract.IView, MainContr
     public static final String RESPONSE_EXCEPTION_LOGINOUT = "ResponseExceptionEventArgs";
     private Observable<ResponseExceptionEventArgs> loginOutObservable;
     public static final int HOME_HOME = 0;
-    public static final int HOME_BUY= 1;
-    public static final int HOME_MINE = 2;
+    public static final int HOME_ORDER= 1;
+    public static final int HOME_MONEY = 2;
+    public static final int HOME_MINE = 3;
     @BindView(R.id.mainFrame)
     FrameLayout mainFrame;
     @BindView(R.id.bottomBar)
@@ -64,15 +66,18 @@ public class MainActivity  extends BaseMvpActivity<MainContract.IView, MainContr
         mPresenter.getUpdateInfo();
         if (savedInstanceState == null) {
             mFragments[HOME_HOME] = HomeFragment.newInstance();
-            mFragments[HOME_BUY] = ShopCarFragment.newInstance();
+            mFragments[HOME_ORDER] = OrderFragment.newInstance();
+            mFragments[HOME_MONEY] = MoneyFragment.newInstance();
             mFragments[HOME_MINE] = MineFragment.newInstance();
             loadMultipleRootFragment(R.id.mainFrame, HOME_HOME,
                     mFragments[HOME_HOME],
-                    mFragments[HOME_BUY],
+                    mFragments[HOME_ORDER],
+                    mFragments[HOME_MONEY],
                     mFragments[HOME_MINE]);
         } else {
             mFragments[HOME_HOME] = findFragment(HomeFragment.class);
-            mFragments[HOME_BUY] = findFragment(ShopCarFragment.class);
+            mFragments[HOME_ORDER] = findFragment(OrderFragment.class);
+            mFragments[HOME_MONEY] = findFragment(MoneyFragment.class);
             mFragments[HOME_MINE] = findFragment(MineFragment.class);
         }
     }
@@ -116,13 +121,17 @@ public class MainActivity  extends BaseMvpActivity<MainContract.IView, MainContr
                 showHideFragment(mFragments[0], mFragments[prePosition]);
                 prePosition = 0;
                 break;
-            case R.id.rb_buy:
+            case R.id.rb_order:
                 showHideFragment(mFragments[1], mFragments[prePosition]);
                 prePosition = 1;
                 break;
-            case R.id.rb_mine:
+            case R.id.rb_money:
                 showHideFragment(mFragments[2], mFragments[prePosition]);
                 prePosition = 2;
+                break;
+            case R.id.rb_mine:
+                showHideFragment(mFragments[3], mFragments[prePosition]);
+                prePosition = 3;
                 break;
         }
     }

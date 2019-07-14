@@ -2,6 +2,8 @@ package com.slb.sharebed.ui.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,23 +44,26 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginCon
     private UMShareAPI mShareAPI;
 
     @Override
-    protected boolean hasToolbar() {
-        return false;
+    protected String setToolbarTitle() {
+        return "登录";
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_register, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        ActivityUtil.next(this,RegisterActivity.class);
+        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        StatusBarUtil.setTransparentForImageView(this, null);
-        StatusBarUtil.setLightMode(this);
-//        StatusBarUtil.setDarkMode(this);
         mShareAPI = UMShareAPI.get(this);
         UMShareConfig config = new UMShareConfig();
         config.setSinaAuthType(UMShareConfig.AUTH_TYPE_SSO);
@@ -93,7 +98,8 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginCon
                 mPresenter.getCode(edtMobile.getText().toString());
                 break;
             case R.id.btnLogin:
-                mPresenter.login(edtMobile.getText().toString(), edtVCode.getText().toString());
+//                mPresenter.login(edtMobile.getText().toString(), edtVCode.getText().toString());
+                ActivityUtil.next(this,MainActivity.class);
                 break;
             case R.id.TvWxLogin:
                 mPresenter.thirdLogin(SHARE_MEDIA.WEIXIN, mShareAPI, LoginActivity.this);

@@ -73,7 +73,7 @@ public class WebViewActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if(isShare == 1){
-            getMenuInflater().inflate(R.menu.menu_share, menu);
+            getMenuInflater().inflate(R.menu.menu_login, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }

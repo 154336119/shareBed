@@ -31,16 +31,20 @@
                 android:text="首页"
                 style="@style/tab_bottom"/>
             <RadioButton
-                android:id="@+id/rb_buy"
-                android:drawableTop="@drawable/slt_main_bottom_buy"
-                android:text="购物车"
+                android:id="@+id/rb_order"
+                android:drawableTop="@drawable/slt_main_bottom_order"
+                android:text="订单"
+                style="@style/tab_bottom"/>
+            <RadioButton
+                android:id="@+id/rb_money"
+                android:drawableTop="@drawable/slt_main_bottom_money"
+                android:text="钱包"
                 style="@style/tab_bottom"/>
             <RadioButton
                 android:id="@+id/rb_mine"
                 android:drawableTop="@drawable/slt_main_bottom_mine"
                 android:text="我的"
                 style="@style/tab_bottom"/>
-
         </RadioGroup>
     </android.support.v7.widget.CardView>
 </RelativeLayout>

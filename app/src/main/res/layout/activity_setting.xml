@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     android:orientation="vertical"
     android:background="#f1f1f1">
         <LinearLayout
@@ -11,6 +11,29 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/RlSecurity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/distance_15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="账号安全"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/jiantou_wode" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f1f1f1"/>
             <RelativeLayout
                 android:id="@+id/RlAbout"
                 android:layout_width="match_parent"
@@ -20,7 +43,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="关于我们"
-                    android:textColor="#4b4b4b"/>
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_494949"/>
                 <TextView
                     android:id="@+id/TvVersion"
                     android:layout_width="wrap_content"
@@ -52,7 +76,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="清空缓存"
-                    android:textColor="#4b4b4b"/>
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_494949"/>
                 <TextView
                     android:id="@+id/TvCacheNum"
                     android:layout_width="wrap_content"
@@ -73,6 +98,32 @@
                 android:layout_height="1dp"
                 android:background="#f1f1f1"/>
             <RelativeLayout
+                android:id="@+id/RlLaw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp"
+                android:padding="@dimen/distance_15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="法律声明与平台规则"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/jiantou_wode" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f1f1f1"/>
+            <RelativeLayout
                 android:id="@+id/RlAgreement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,8 +131,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="用户协议"
-                    android:textColor="#4b4b4b" />
+                    android:text="用户指南"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_494949" />
 
                 <ImageView
                     android:layout_width="wrap_content"

@@ -7,11 +7,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.slb.frame.ui.activity.BaseActivity;
 import com.slb.sharebed.Base;
 import com.slb.sharebed.R;
 import com.slb.sharebed.util.FileUtils;
-import com.slb.frame.ui.activity.BaseActivity;
-import com.slb.frame.utils.ActivityUtil;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UTrack;
 
@@ -41,6 +40,11 @@ public class SettingActivity extends BaseActivity {
     RelativeLayout RlAgreement;
     @BindView(R.id.TvLoginOut)
     TextView TvLoginOut;
+    @BindView(R.id.RlSecurity)
+    RelativeLayout RlSecurity;
+    @BindView(R.id.RlLaw)
+    RelativeLayout RlLaw;
+
     @Override
     protected String setToolbarTitle() {
         return getString(R.string.Settings);
@@ -62,9 +66,13 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.RlAbout, R.id.RlClearCache, R.id.RlAgreement,R.id.TvLoginOut})
+    @OnClick({R.id.RlAbout, R.id.RlClearCache, R.id.RlAgreement, R.id.RlSecurity, R.id.RlLaw,R.id.TvLoginOut})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.RlSecurity:
+                break;
+            case R.id.RlLaw:
+                break;
             case R.id.RlAbout:
                 break;
             case R.id.RlClearCache:
@@ -122,7 +130,7 @@ public class SettingActivity extends BaseActivity {
                 });
                 Base.setUserEntity(null);
 
-                Intent intent = new Intent(this,LoginActivity.class);
+                Intent intent = new Intent(this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
 //                ActivityUtil.next(this,LoginActivity.class,null,true);
