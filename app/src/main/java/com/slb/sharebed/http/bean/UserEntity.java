@@ -3,41 +3,56 @@ package com.slb.sharebed.http.bean;
 public class UserEntity {
 
     /**
-     * id : 3
+     * id : 5
      * mobile : 15208305795
-     * nick_name : 手机用户152****5795
+     * nickName : 手机用户152****5795
      * logo : https://api.dddiancan.com/nopic.png
-     * wechat_openid : 
-     * business_license : 
+     * wechatOpenid :
+     * qqOpenid :
+     * gender : 0
+     * age : 0
+     * isIdentified : 0
+     * isUrgent : 0
+     * idcardFront :
+     * dicartBack :
+     * idcardNo :
+     * realName :
+     * checkRemark :
      * platform : 1
+     * isDeposit : 0
+     * balance : 0
      * state : 0
-     * token : 162051c447b3481d6f3e86886bfcb4cc00c4f80e2e471851ca640573c3490ce5
+     * createTime : 2019-07-18 23:49:36
+     * token : 271bab5a0a3d9110e8aa3fc2eb8a9f6afa0add37ebec47bfdba66adc9aff4712
      */
 
-    private Integer id;
+    private int id;
     private String mobile;
-    private String nick_name;
+    private String nickName;
     private String logo;
-    private String wechat_openid;
-    private String business_license;
-    private Integer platform;
-    private Integer state;
+    private String wechatOpenid;
+    private String qqOpenid;
+    private int gender;
+    private int age;
+    private int isIdentified;
+    private int isUrgent;
+    private String idcardFront;
+    private String dicartBack;
+    private String idcardNo;
+    private String realName;
+    private String checkRemark;
+    private int platform;
+    private int isDeposit;
+    private int balance;
+    private int state;
+    private String createTime;
     private String token;
 
-    public String getRefuse_reason() {
-        return refuse_reason;
-    }
-
-    public void setRefuse_reason(String refuse_reason) {
-        this.refuse_reason = refuse_reason;
-    }
-
-    private String refuse_reason;//失败原因
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,12 +64,12 @@ public class UserEntity {
         this.mobile = mobile;
     }
 
-    public String getNick_name() {
-        return nick_name;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNick_name(String nick_name) {
-        this.nick_name = nick_name;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getLogo() {
@@ -65,36 +80,132 @@ public class UserEntity {
         this.logo = logo;
     }
 
-    public String getWechat_openid() {
-        return wechat_openid;
+    public String getWechatOpenid() {
+        return wechatOpenid;
     }
 
-    public void setWechat_openid(String wechat_openid) {
-        this.wechat_openid = wechat_openid;
+    public void setWechatOpenid(String wechatOpenid) {
+        this.wechatOpenid = wechatOpenid;
     }
 
-    public String getBusiness_license() {
-        return business_license;
+    public String getQqOpenid() {
+        return qqOpenid;
     }
 
-    public void setBusiness_license(String business_license) {
-        this.business_license = business_license;
+    public void setQqOpenid(String qqOpenid) {
+        this.qqOpenid = qqOpenid;
     }
 
-    public Integer getPlatform() {
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getIsIdentified() {
+        return isIdentified;
+    }
+
+    public void setIsIdentified(int isIdentified) {
+        this.isIdentified = isIdentified;
+    }
+
+    public int getIsUrgent() {
+        return isUrgent;
+    }
+
+    public void setIsUrgent(int isUrgent) {
+        this.isUrgent = isUrgent;
+    }
+
+    public String getIdcardFront() {
+        return idcardFront;
+    }
+
+    public void setIdcardFront(String idcardFront) {
+        this.idcardFront = idcardFront;
+    }
+
+    public String getDicartBack() {
+        return dicartBack;
+    }
+
+    public void setDicartBack(String dicartBack) {
+        this.dicartBack = dicartBack;
+    }
+
+    public String getIdcardNo() {
+        return idcardNo;
+    }
+
+    public void setIdcardNo(String idcardNo) {
+        this.idcardNo = idcardNo;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getCheckRemark() {
+        return checkRemark;
+    }
+
+    public void setCheckRemark(String checkRemark) {
+        this.checkRemark = checkRemark;
+    }
+
+    public int getPlatform() {
         return platform;
     }
 
-    public void setPlatform(Integer platform) {
+    public void setPlatform(int platform) {
         this.platform = platform;
     }
 
-    public Integer getState() {
+    public int getIsDeposit() {
+        return isDeposit;
+    }
+
+    public void setIsDeposit(int isDeposit) {
+        this.isDeposit = isDeposit;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public int getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public void setState(int state) {
         this.state = state;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getToken() {

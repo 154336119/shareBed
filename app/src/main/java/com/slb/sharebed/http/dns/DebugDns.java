@@ -16,7 +16,7 @@ public class DebugDns implements Dns {
     }
     @Override
     public String getCommonBaseUrl() {
-        return "http://api.xikeqiche.com/";
+        return "http://sharebed.lanlin.site/";
     }
 
     @Override

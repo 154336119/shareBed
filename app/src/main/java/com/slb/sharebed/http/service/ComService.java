@@ -21,10 +21,11 @@ public interface ComService {
      * 用户-登录
      */
     @FormUrlEncoded
-    @POST("app/user/login")
-    Observable<HttpMjResult<UserEntity>> login(@Field("mobile") String mobile,
+    @POST("app/user/login/register")
+    Observable<HttpMjResult<UserEntity>> loginOrRigister(@Field("mobile") String mobile,
                                                @Field("verifyCode") String verifyCode,
-                                               @Field("platform") int platform);
+                                               @Field("platform") int platform,
+                                               @Field("scene") int scene);
 
     /**
      * 第三方登录
@@ -42,15 +43,15 @@ public interface ComService {
      * 用户-发短信验证码
      */
     @FormUrlEncoded
-    @POST("app/common/sms")
-    Observable<HttpMjResult<Object>> sendMsgCode(@Field("mobile") String mobile);
+    @POST("app/user/sendSms")
+    Observable<HttpMjResult<Object>> sendMsgCode(@Field("mobile") String mobile,@Field("scene") Integer scene);
 
     /**
      * 用户-个人账号信息
      */
     @FormUrlEncoded
     @POST("app/user/info")
-    Observable<HttpMjResult<UserEntity>> getUserINfo(@Field("mobile") String mobile);
+    Observable<HttpMjResult<UserEntity>> getUserINfo(@Field("mobile") String mobile,@Field("scene") String scene);
 
 
     /**

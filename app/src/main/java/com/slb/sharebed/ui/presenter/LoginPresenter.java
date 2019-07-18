@@ -36,7 +36,7 @@ public class LoginPresenter extends AbstractBasePresenter<LoginContract.IView>
 		implements LoginContract.IPresenter<LoginContract.IView>{
 	@Override
 	public void getCode(String mobile) {
-		RetrofitSerciveFactory.provideComService().sendMsgCode(mobile)
+		RetrofitSerciveFactory.provideComService().sendMsgCode(mobile,1)
 				.lift(new BindPrssenterOpterator<HttpMjResult< Object>>(this))
 				.compose(RxUtil.<HttpMjResult< Object>>applySchedulersForRetrofit())
 				.map(new HttpMjEntityFun< Object>())
@@ -53,7 +53,7 @@ public class LoginPresenter extends AbstractBasePresenter<LoginContract.IView>
 
 	@Override
 	public void login(String mobile, String verifyCode) {
-		RetrofitSerciveFactory.provideComService().login(mobile,verifyCode,1)
+		RetrofitSerciveFactory.provideComService().loginOrRigister(mobile,verifyCode,1,1)
 				.lift(new BindPrssenterOpterator<HttpMjResult<UserEntity>>(this))
 				.compose(RxUtil.<HttpMjResult<UserEntity>>applySchedulersForRetrofit())
 				.map(new HttpMjEntityFun<UserEntity>())

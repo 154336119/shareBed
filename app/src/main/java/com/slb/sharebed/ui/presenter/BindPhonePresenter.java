@@ -36,7 +36,7 @@ public class BindPhonePresenter extends AbstractBasePresenter<BindPhoneContract.
 		implements BindPhoneContract.IPresenter<BindPhoneContract.IView>{
 	@Override
 	public void getCode(String mobile) {
-		RetrofitSerciveFactory.provideComService().sendMsgCode(mobile)
+		RetrofitSerciveFactory.provideComService().sendMsgCode(mobile,3)
 				.lift(new BindPrssenterOpterator<HttpMjResult< Object>>(this))
 				.compose(RxUtil.<HttpMjResult< Object>>applySchedulersForRetrofit())
 				.map(new HttpMjEntityFun< Object>())
@@ -52,18 +52,7 @@ public class BindPhonePresenter extends AbstractBasePresenter<BindPhoneContract.
 	}
 
 	@Override
-	public void login(String mobile, String verifyCode) {
-		RetrofitSerciveFactory.provideComService().login(mobile,verifyCode,1)
-				.lift(new BindPrssenterOpterator<HttpMjResult<UserEntity>>(this))
-				.compose(RxUtil.<HttpMjResult<UserEntity>>applySchedulersForRetrofit())
-				.map(new HttpMjEntityFun<UserEntity>())
-				.subscribe(new BaseSubscriber<UserEntity>(this.mView) {
-					@Override
-					public void onNext(UserEntity entity) {
-						super.onNext(entity);
-						setLoginUserInfo(entity);
-					}
-				});
+	public void bind(String openid, Integer type, String nickName, String logo, String mobile, String verifyCode, Integer platform) {
 
 	}
 

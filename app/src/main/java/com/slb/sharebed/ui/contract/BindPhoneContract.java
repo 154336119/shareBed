@@ -21,6 +21,6 @@ public class BindPhoneContract {
 		/*** 获取验证码*/
 		void getCode(String mobile);
 		/*** 登陆*/
-		void login( String mobile, String verifyCode);
+		void bind(String openid, Integer type, String nickName, String logo,String mobile, String verifyCode,Integer platform);
 	}
 }

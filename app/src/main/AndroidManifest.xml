@@ -28,8 +28,7 @@
         android:supportsRtl="true"
         android:debuggable="false"
         android:theme="@style/App_Theme">
-        <activity android:name="com.slb.sharebed.ui.activity.ScanAcitivty" android:launchMode="singleTask"
-            android:theme="@style/App_Theme_no_statebar">
+        <activity android:name="com.slb.sharebed.ui.activity.LoginActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -66,10 +65,11 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <!--<activity-->
-            <!--android:name="com.slb.sharebed.ui.activity.ScanAcitivty"-->
-            <!--android:configChanges="orientation|keyboardHidden"-->
-            <!--android:screenOrientation="portrait"/>-->
+        <activity
+            android:name="com.slb.sharebed.ui.activity.ScanAcitivty"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/App_Theme_no_statebar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.slb.sharebed.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

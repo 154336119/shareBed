@@ -68,11 +68,9 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginCon
         UMShareConfig config = new UMShareConfig();
         config.setSinaAuthType(UMShareConfig.AUTH_TYPE_SSO);
         mShareAPI.setShareConfig(config);
-        if (Base.getUserEntity() != null && !TextUtils.isEmpty(Base.getUserEntity().getToken()) && Base.getUserEntity().getState() == 2) {
+        if (Base.getUserEntity() != null && !TextUtils.isEmpty(Base.getUserEntity().getToken())) {
             ActivityUtil.next(this, MainActivity.class, null, true);
-        } else if (Base.getUserEntity() != null && !TextUtils.isEmpty(Base.getUserEntity().getToken())) {
-            mPresenter.getUserInfo(Base.getUserEntity().getToken());
-        }
+        } 
 
     }
 
@@ -98,8 +96,8 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginCon
                 mPresenter.getCode(edtMobile.getText().toString());
                 break;
             case R.id.btnLogin:
-//                mPresenter.login(edtMobile.getText().toString(), edtVCode.getText().toString());
-                ActivityUtil.next(this,MainActivity.class);
+                mPresenter.login(edtMobile.getText().toString(), edtVCode.getText().toString());
+//                ActivityUtil.next(this,MainActivity.class);
                 break;
             case R.id.TvWxLogin:
                 mPresenter.thirdLogin(SHARE_MEDIA.WEIXIN, mShareAPI, LoginActivity.this);

@@ -3,6 +3,7 @@ package com.slb.sharebed.http.okhttpclient;
 
 import com.slb.frame.http2.retrofit.HttpLoggingInterceptor;
 import com.slb.frame.utils.security.Security;
+import com.slb.sharebed.Base;
 import com.slb.sharebed.BuildConfig;
 
 
@@ -71,8 +72,7 @@ public class CodeOkhttpClient {
             Request compressedRequest = originalRequest.newBuilder()
                     .addHeader("os", "android")
                     .addHeader("version", BuildConfig.VERSION_NAME)
-                    .addHeader("timestamp",timestamp)
-                    .addHeader("access_token", Security.getMD5Value(timestamp))
+                    .addHeader("token", Base.getUserEntity().getToken())
                     .build();
             return chain.proceed(compressedRequest);
         }

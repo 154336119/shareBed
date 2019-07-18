@@ -79,7 +79,7 @@ public class BindPhoneActivity extends BaseMvpActivity<BindPhoneContract.IView, 
                 mPresenter.getCode(edtMobile.getText().toString());
                 break;
             case R.id.btnRegister:
-                mPresenter.login(edtMobile.getText().toString(), edtVCode.getText().toString());
+//                mPresenter.login(edtMobile.getText().toString(), edtVCode.getText().toString());
                 break;
         }
     }

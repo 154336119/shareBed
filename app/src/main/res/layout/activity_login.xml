@@ -42,6 +42,7 @@
             style="@style/edit_base"
             android:completionThreshold="1"
             android:hint="请输入手机号码"
+            android:text="15208305795"
             android:lines="1"
             android:drawablePadding="5dp"/>
 
