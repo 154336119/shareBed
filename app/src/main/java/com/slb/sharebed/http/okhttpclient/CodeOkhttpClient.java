@@ -69,11 +69,19 @@ public class CodeOkhttpClient {
         public Response intercept(Chain chain) throws IOException {
             String timestamp = String.format("%1$s-%2$d", UUID.randomUUID().toString(), System.currentTimeMillis());
             Request originalRequest = chain.request();
-            Request compressedRequest = originalRequest.newBuilder()
-                    .addHeader("os", "android")
-                    .addHeader("version", BuildConfig.VERSION_NAME)
-                    .addHeader("token", Base.getUserEntity().getToken())
-                    .build();
+            Request compressedRequest;
+            if(Base.getUserEntity()!=null){
+                 compressedRequest = originalRequest.newBuilder()
+                        .addHeader("os", "android")
+                        .addHeader("version", BuildConfig.VERSION_NAME)
+                        .addHeader("token", Base.getUserEntity().getToken())
+                        .build();
+            }else{
+               compressedRequest = originalRequest.newBuilder()
+                        .addHeader("os", "android")
+                        .addHeader("version", BuildConfig.VERSION_NAME)
+                        .build();
+            }
             return chain.proceed(compressedRequest);
         }
     }

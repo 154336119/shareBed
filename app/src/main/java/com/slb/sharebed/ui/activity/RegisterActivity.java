@@ -34,7 +34,6 @@ public class RegisterActivity extends BaseMvpActivity<RegisterContract.IView, Re
     CountTimerButton BtnGetCode;
     @BindView(R.id.btnRegister)
     ImageView btnRegister;
-
     @Override
     protected String setToolbarTitle() {
         return "注册";
