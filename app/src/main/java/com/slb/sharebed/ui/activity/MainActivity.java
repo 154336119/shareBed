@@ -64,6 +64,7 @@ public class MainActivity  extends BaseMvpActivity<MainContract.IView, MainContr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter.getUpdateInfo();
+        mPresenter.getUserInfo();
         if (savedInstanceState == null) {
             mFragments[HOME_HOME] = HomeFragment.newInstance();
             mFragments[HOME_ORDER] = OrderFragment.newInstance();

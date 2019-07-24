@@ -177,7 +177,7 @@ public class MoneyFragment extends BaseFragment {
                 bundle.putString("url",MyConstants.h5Url + data.url);
             }
             bundle.putString("title",data.title);
-            bundle.putInt("isShare",data.isShare);
+//            bundle.putInt("isShare",data.isShare);
 
             if(!TextUtils.isEmpty(data.shareTitle)){
                 bundle.putString("shareTitle",data.shareTitle);

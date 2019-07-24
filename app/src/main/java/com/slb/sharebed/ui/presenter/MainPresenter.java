@@ -3,6 +3,7 @@ package com.slb.sharebed.ui.presenter;
 import com.slb.sharebed.Base;
 import com.slb.sharebed.http.RetrofitSerciveFactory;
 import com.slb.sharebed.http.bean.UpdateEntity;
+import com.slb.sharebed.http.bean.UserEntity;
 import com.slb.sharebed.ui.contract.MainContract;
 import com.slb.frame.http2.retrofit.HttpMjResult;
 import com.slb.frame.http2.rxjava.BaseSubscriber;
@@ -30,6 +31,24 @@ public class MainPresenter extends AbstractBasePresenter<MainContract.IView>
 						if (entity.getVersion_num() > Base.getVersionCode(Base.getContext())){
 							mView.tipUpdate(entity);
 						}
+					}
+
+					@Override
+					public void onStart() {
+					}
+				});
+	}
+
+	@Override
+	public void getUserInfo() {
+		RetrofitSerciveFactory.provideComService().getUserINfo(Base.getUserEntity().getToken())
+				.lift(new BindPrssenterOpterator<HttpMjResult<UserEntity>>(this))
+				.compose(RxUtil.<HttpMjResult<UserEntity>>applySchedulersForRetrofit())
+				.map(new HttpMjEntityFun<UserEntity>())
+				.subscribe(new BaseSubscriber<UserEntity>(this.mView) {
+					@Override
+					public void onNext(UserEntity entity) {
+						Base.setUserEntity(entity);
 					}
 
 					@Override

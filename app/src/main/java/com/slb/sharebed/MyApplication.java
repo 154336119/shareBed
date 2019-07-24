@@ -14,6 +14,7 @@ import com.slb.frame.http2.retrofit.HttpLoggingInterceptor;
 import com.slb.sharebed.ui.SharedPreferencesUtil;
 import com.slb.sharebed.util.config.BizcContant;
 import com.tencent.bugly.Bugly;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -24,9 +25,11 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 public class MyApplication extends Application{
+    private static MyApplication mInstance;
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
         Base.initialize(this);
         initLogUtils();
         initOkGo();
@@ -97,5 +100,20 @@ public class MyApplication extends Application{
 
         @Override
         protected Object clone() throws CloneNotSupportedException {return super.clone();}
+        public static MyApplication getInstance() {
+            return mInstance;
+        }
 
+    /**
+     * 微信支付相关
+     */
+    private BaseResp resp;
+
+    public BaseResp getResp() {
+        return resp;
+    }
+
+    public void setResp(BaseResp resp) {
+        this.resp = resp;
+    }
 }

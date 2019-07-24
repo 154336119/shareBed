@@ -14,5 +14,6 @@ public class MainContract {
 	}
 	public interface IPresenter<T> extends IBasePresenter<T> {
 		void getUpdateInfo();
+		void getUserInfo();
 	}
 }

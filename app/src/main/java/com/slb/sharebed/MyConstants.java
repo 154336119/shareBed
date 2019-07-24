@@ -28,7 +28,7 @@ package com.slb.sharebed;
 public class MyConstants {
     public static final String url = "http://yclx.api.kaixuanhotels.cn/";
 
-    public static final String h5Url = "http://h5.xikeqiche.com";
+    public static final String h5Url = "http://h5.gxcw.meijiangkj.com";
 
     public static final String WX_APP_ID = "wx6e626c6693c3c055";
 
@@ -154,47 +154,6 @@ public class MyConstants {
 
 
 
-
-
-
-    /**
-     * 秒杀详情
-     */
-    public static final String url_miaoshaxiangqing = "/seckillinfo?seckillId=";
-
-    /**
-     * 产品详情
-     */
-    public static final String url_chanpingxiangqing = "/goodsinfo?productId=";
-    /**
-     * 收货地址管理
-     */
-    public static final String url_shouhuodizhiguanli = "/addresslist?state=2&token=";
-
-    /**
-     * 邀请好友
-     */
-    public static final String url_yaoqinghaoyou = "/share";
-
-    /**
-     * 订单详情
-     */
-    public static final String url_dingdanxiangqing = "/orderDetail?orderId=";
-
-    /**
-     * 意见反馈
-     */
-    public static final String url_yijianfankui = "/feedback?token=";
-
-    /**
-     * 购物车
-     */
-    public static final String url_gouwuche = "/shopCar?token=";
-
-    /**
-     * 查看物流
-     */
-    public static final String url_chakanwuliu = "/lookLogistics?orderId=";
 
     //图片选择
     public static final int REQUEST_CODE_PROOF_IMG_PICK=1009;

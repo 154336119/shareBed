@@ -50,9 +50,8 @@ public interface ComService {
      * 用户-个人账号信息
      */
     @FormUrlEncoded
-    @POST("app/user/info")
-    Observable<HttpMjResult<UserEntity>> getUserINfo(@Field("mobile") String mobile,@Field("scene") String scene);
-
+    @POST("app/user/queryInfo")
+    Observable<HttpMjResult<UserEntity>> getUserINfo(@Field("token") String token);
 
     /**
      * 升级
@@ -60,6 +59,7 @@ public interface ComService {
     @FormUrlEncoded
     @POST("/app/version/check"  )
     Observable<HttpMjResult<UpdateEntity>> getUpdateInfo(@Field("platform") int platform);
+
 
     /**
      * 支付

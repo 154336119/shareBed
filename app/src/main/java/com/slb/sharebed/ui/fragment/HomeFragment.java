@@ -9,7 +9,10 @@ import android.widget.ImageView;
 
 import com.slb.frame.ui.fragment.BaseMvpFragment;
 import com.slb.frame.utils.ActivityUtil;
+import com.slb.sharebed.Base;
 import com.slb.sharebed.R;
+import com.slb.sharebed.ui.activity.NoDepositAcitivty;
+import com.slb.sharebed.ui.activity.NoIdentifieActivity;
 import com.slb.sharebed.ui.activity.ScanAcitivty;
 import com.slb.sharebed.ui.contract.HomeContract;
 import com.slb.sharebed.ui.presenter.HomePresenter;
@@ -88,6 +91,17 @@ public class HomeFragment
             case R.id.IvKefu:
                 break;
             case R.id.IvSacn:
+                if(Base.getUserEntity().getIsDeposit() == 0){
+                    //未交押金
+                    ActivityUtil.next(_mActivity, NoDepositAcitivty.class);
+                    return;
+                }
+                if(Base.getUserEntity().getIsIdentified() == 0){
+                    //未实名认证
+                    ActivityUtil.next(_mActivity, NoIdentifieActivity.class);
+                    return;
+                }
+
                 toScanActivity();
                 break;
         }

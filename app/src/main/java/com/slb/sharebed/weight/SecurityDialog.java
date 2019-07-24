@@ -14,7 +14,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
+import com.slb.frame.utils.ActivityUtil;
+import com.slb.sharebed.Base;
+import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
+import com.slb.sharebed.ui.activity.WebViewActivity;
+
+import static com.slb.sharebed.MyConstants.url_linkman;
 
 @SuppressLint("ValidFragment")
 public class SecurityDialog extends BottomSheetDialogFragment {
@@ -44,12 +50,22 @@ public class SecurityDialog extends BottomSheetDialogFragment {
         view.findViewById(R.id.RlUrgentPeople).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("url", MyConstants.h5Url + url_linkman
+                        + Base.getUserEntity().getToken());
+                bundle.putString("title","紧急联系人");
+                ActivityUtil.next(getActivity(), WebViewActivity.class,bundle,false);
                 dialog.cancel();
             }
         });
         view.findViewById(R.id.RlAuth).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
+                        + Base.getUserEntity().getToken());
+                bundle.putString("title","实名认证");
+                ActivityUtil.next(getActivity(),WebViewActivity.class,bundle,false);
                 dialog.cancel();
             }
         });

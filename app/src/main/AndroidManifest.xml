@@ -76,6 +76,15 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.slb.sharebed.ui.activity.NoDepositAcitivty"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/ActivityDialogStyle"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.slb.sharebed.ui.activity.NoIdentifieActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/ActivityDialogStyle"
+            android:screenOrientation="portrait"/>
     </application>
-
 </manifest>
