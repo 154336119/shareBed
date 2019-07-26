@@ -50,6 +50,7 @@ import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
 import com.slb.sharebed.event.FinishAcitivtyEvent;
 import com.slb.sharebed.event.OrderRefreshEvent;
+import com.slb.sharebed.event.RefreshUserInfoEvent;
 import com.slb.sharebed.http.bean.PayEntity;
 import com.slb.sharebed.http.bean.PayResult;
 import com.slb.sharebed.http.bean.WebBean;
@@ -171,6 +172,7 @@ public class WebViewActivity  extends BaseMvpActivity<WebViewContract.IView, Web
         super.getIntentExtras();
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
+        Logger.d("========url:"+url);
         isShare = getIntent().getIntExtra("isShare",0);
         if(isShare == 1){
             UMWeb web = new UMWeb(getIntent().getStringExtra("shareUrl")+"&ifshare=2");
@@ -381,8 +383,28 @@ public class WebViewActivity  extends BaseMvpActivity<WebViewContract.IView, Web
         @JavascriptInterface
         public void appLink(String json) {
             WebBean data = new Gson().fromJson(json, WebBean.class);
-            //linkType（首页：index，个人中心：my , 上传凭证：upProve ,登录：login） 。
-
+            //linkType  首页：index，个人中心：my , 钱包：wallet ,登录：login） 。
+            if ("index".equals(data.linkType)) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(MyConstants.HOME_SELECTED_FRAGMENT,0);
+                ActivityUtil.next(WebViewActivity.this, MainActivity.class,bundle,true);
+                RxBus.get().post(new RefreshUserInfoEvent());
+                finish();
+            } else if ("my".equals(data.linkType)) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(MyConstants.HOME_SELECTED_FRAGMENT,3);
+                ActivityUtil.next(WebViewActivity.this, MainActivity.class,bundle,true);
+                RxBus.get().post(new RefreshUserInfoEvent());
+                finish();
+            } else if ("wallet".equals(data.linkType)) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(MyConstants.HOME_SELECTED_FRAGMENT,2);
+                ActivityUtil.next(WebViewActivity.this, MainActivity.class,bundle,true);
+                finish();
+            } else if ("login".equals(data.linkType)) {
+                ActivityUtil.next(WebViewActivity.this, LoginActivity.class);
+                finish();
+            }
         }
 
 

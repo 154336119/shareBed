@@ -5,10 +5,12 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
 import com.alibaba.fastjson.JSONObject;
+import com.slb.sharebed.http.bean.ConfigEntity;
 import com.slb.sharebed.http.bean.UserEntity;
 import com.slb.sharebed.util.SharedPreferencesUtils;
 import com.slb.sharebed.util.config.BizcContant;
 
+import static com.slb.sharebed.util.config.BizcContant.SP_CONFIG;
 import static com.slb.sharebed.util.config.BizcContant.SP_USER;
 
 
@@ -31,6 +33,9 @@ public class Base {
     private static int mEnvironment;
 
     private static UserEntity mUserEntity;
+
+
+    private static ConfigEntity mConfigEntity;
 
     public static void  initialize(@NonNull Context context) {
         mContext = context;
@@ -69,6 +74,20 @@ public class Base {
         Base.mUserEntity = mUserEntity;
     }
 
+    public static ConfigEntity getConfigEntity() {
+        if(mConfigEntity == null){
+            String configJsonStr = (String) SharedPreferencesUtils.getParam(Base.getContext(), BizcContant.SP_CONFIG, "");
+            ConfigEntity entity =JSONObject.parseObject(configJsonStr,ConfigEntity.class);
+            Base.setConfigEntity(entity);
+        }
+        return mConfigEntity;
+    }
+
+    public static void setConfigEntity(ConfigEntity mConfigEntity) {
+        String configJsonStr = JSONObject.toJSONString(mConfigEntity);//将java对象转换为json对象
+        SharedPreferencesUtils.setParam(mContext, SP_CONFIG,configJsonStr);
+        Base.mConfigEntity = mConfigEntity;
+    }
     /**
      * 获取软件版本号
      *

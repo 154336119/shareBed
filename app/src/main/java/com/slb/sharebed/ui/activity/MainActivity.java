@@ -8,9 +8,11 @@ import android.support.annotation.IdRes;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.jaeger.library.StatusBarUtil;
 import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
+import com.slb.sharebed.event.RefreshUserInfoEvent;
 import com.slb.sharebed.http.bean.UpdateEntity;
 import com.slb.sharebed.ui.contract.MainContract;
 import com.slb.sharebed.ui.fragment.MoneyFragment;
@@ -28,7 +30,7 @@ import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscription;
 
-public class MainActivity  extends BaseMvpActivity<MainContract.IView, MainContract.IPresenter>implements MainContract.IView , RadioGroup.OnCheckedChangeListener{
+public class MainActivity extends BaseMvpActivity<MainContract.IView, MainContract.IPresenter>implements MainContract.IView , RadioGroup.OnCheckedChangeListener{
     private Subscription loginOutSub;
     public static final String RESPONSE_EXCEPTION_LOGINOUT = "ResponseExceptionEventArgs";
     private Observable<ResponseExceptionEventArgs> loginOutObservable;
@@ -65,6 +67,7 @@ public class MainActivity  extends BaseMvpActivity<MainContract.IView, MainContr
         super.onCreate(savedInstanceState);
         mPresenter.getUpdateInfo();
         mPresenter.getUserInfo();
+        mPresenter.getConfigInfo();
         if (savedInstanceState == null) {
             mFragments[HOME_HOME] = HomeFragment.newInstance();
             mFragments[HOME_ORDER] = OrderFragment.newInstance();
@@ -170,5 +173,8 @@ public class MainActivity  extends BaseMvpActivity<MainContract.IView, MainContr
         });
     }
 
-
+    @Subscribe
+    public void refreshUserInfoEvent(RefreshUserInfoEvent event) {
+        mPresenter.getUserInfo();
+    }
 }

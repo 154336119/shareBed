@@ -54,6 +54,14 @@ public interface ComService {
     Observable<HttpMjResult<UserEntity>> getUserINfo(@Field("token") String token);
 
     /**
+     * 用户-配置
+     */
+    @FormUrlEncoded
+    @POST("/app/config/al"  )
+    Observable<HttpMjResult<ConfigEntity>> getConfig(@Field("token") String token);
+
+
+    /**
      * 升级
      */
     @FormUrlEncoded
@@ -68,12 +76,6 @@ public interface ComService {
     @POST("/app/config/paymentCode"  )
     Observable<HttpMjResult<PayTypeEntity>> getPayTypeConfig(@Field("token") Integer token);
 
-    /**
-     * 我的- 用户协议
-     */
-    @FormUrlEncoded
-    @POST("/app/config/aboutus"  )
-    Observable<HttpMjResult<ConfigEntity>> getConfig(@Field("token") Integer token);
 
 
     /**
@@ -82,4 +84,15 @@ public interface ComService {
     @FormUrlEncoded
     @POST("/app/user/info"  )
     Observable<HttpMjResult<UserEntity>> getUserInfo(@Field("token") String token);
+
+
+
+
+    /**
+     *  用户信息
+     */
+    @FormUrlEncoded
+    @POST("/app/bed/open" )
+    Observable<HttpMjResult<UserEntity>> bedOpen(@Field("token") String token,@Field("code") String code);
+
 }

@@ -1,5 +1,6 @@
 package com.slb.sharebed.ui.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -24,6 +25,8 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.leo.permission.PermissionRequest;
+import cn.leo.permission.PermissionRequestFailedCallback;
 
 
 public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginContract.IPresenter>
@@ -118,5 +121,8 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginCon
     public void showCountdown() {
         BtnGetCode.startCountTimer();
     }
-
+    @PermissionRequestFailedCallback
+    private void failed(String[] failedPermissions) {
+        showToastMsg("获取权限失败，操作无法完成");
+    }
 }

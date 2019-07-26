@@ -1,5 +1,6 @@
 package com.slb.sharebed.http.bean;
 
+import com.slb.sharebed.R;
 import com.slb.sharebed.ui.activity.SuccessActivity;
 
 /**
@@ -9,7 +10,8 @@ import com.slb.sharebed.ui.activity.SuccessActivity;
  */
 
 public enum SuccessTypeEnum {
-	TYPE_100("注册成功","恭喜您，注册成功！","欢迎您的使用","进入首页", SuccessActivity.TYPE_100);
+	TYPE_100("注册成功","恭喜您，注册成功！","欢迎您的使用","进入首页", SuccessActivity.TYPE_100, R.mipmap.rectangle);
+
 
 	/**
 	 * TYPE_100 - 成功页面——注册成功
@@ -18,13 +20,15 @@ public enum SuccessTypeEnum {
 	private String titleContent;
 	private String content;
 	private String btnText;
+	private int imgId;
 	private int type;
-	SuccessTypeEnum(String title, String titleContent, String content, String btnText, int type) {
+	SuccessTypeEnum(String title, String titleContent, String content, String btnText, int type,int imgId) {
 		this.title = title;
 		this.titleContent = titleContent;
 		this.content = content;
 		this.btnText = btnText;
 		this.type = type;
+		this.imgId = imgId;
 	}
 
 	public static SuccessTypeEnum getEnumForType(int type){
@@ -80,5 +84,12 @@ public enum SuccessTypeEnum {
 	}
 
 
+	public int getImgId() {
+		return imgId;
+	}
+
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
+	}
 
 }

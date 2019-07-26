@@ -47,7 +47,6 @@ public class UserEntity {
     private int state;
     private String createTime;
     private String token;
-
     public int getId() {
         return id;
     }

@@ -27,7 +27,7 @@ public class BizcContant {
     public static final String SP_USER_NAME = "sp_user_name";
     public static final String SP_PW = "sp_pw";
     public static final String SP_USER= "sp_user";
-
+    public static final String SP_CONFIG= "sp_config";
     public static final String SP_IS_FIRST= "sp_is_first";
 
     public static final String STR_CONNECTING= "connecting";

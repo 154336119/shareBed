@@ -96,4 +96,6 @@ dependencies {
     compile 'com.github.iwgang:countdownview:2.1.6'
     //二维码
     implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.6'
+    //liveDataBus
+    implementation 'com.jeremyliao:live-event-bus:1.4.4'
 }

@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
+import com.orhanobut.logger.Logger;
 import com.slb.frame.ui.fragment.BaseFragment;
 import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.Base;
@@ -219,20 +220,20 @@ public class MoneyFragment extends BaseFragment {
 
         }
     }
-//
-//    @Override
-//    public void onHiddenChanged(boolean hidden) {
-//        super.onHiddenChanged(hidden);
-//        if (!hidden) {
-//            mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_gouwuche + Base.getUserEntity().getToken());
-//        }
-//    }
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//       if(isVisibleToUser){
-//           mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_gouwuche + Base.getUserEntity().getToken());
-//       }
-//    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            Logger.d("onHiddenChanged");
+        }
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+       if(isVisibleToUser){
+           Logger.d("setUserVisibleHint");
+       }
+    }
 
 
 }

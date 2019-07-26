@@ -5,18 +5,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
 import com.slb.frame.ui.activity.BaseActivity;
 import com.slb.frame.utils.ActivityUtil;
+import com.slb.sharebed.Base;
 import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
+import com.slb.sharebed.event.RefreshUserInfoEvent;
 import com.slb.sharebed.http.bean.SuccessTypeEnum;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SuccessActivity extends BaseActivity {
-    public static final int TYPE_100 = 100; //注册成功
+public class LockSuccessActivity extends BaseActivity {
 
     @BindView(R.id.TvTitle)
     TextView TvTitle;
@@ -24,12 +26,10 @@ public class SuccessActivity extends BaseActivity {
     TextView TvContent;
     @BindView(R.id.Btn)
     Button Btn;
-    private int type;
-    private SuccessTypeEnum mSuccessTypeEnum;
 
     @Override
     protected String setToolbarTitle() {
-        return mSuccessTypeEnum.getTitle();
+        return "解锁成功";
     }
 
 
@@ -37,25 +37,18 @@ public class SuccessActivity extends BaseActivity {
     public void initView() {
         super.initView();
         ButterKnife.bind(this);
-        TvTitle.setText(mSuccessTypeEnum.getTitleContent());
-        TvContent.setText(mSuccessTypeEnum.getContent());
-        if(type == TYPE_100){
-            Btn.setVisibility(View.GONE);
-        }
-        Btn.setText(mSuccessTypeEnum.getBtnText());
+        TvContent.setText("已进入计时，计时收费："+Base.getConfigEntity().getBED_SINGLE_PRICE()+"元/小时");
     }
 
     @Override
     public void getIntentExtras() {
         super.getIntentExtras();
-        type = getIntent().getIntExtra(MyConstants.TYPE,TYPE_100);
-//        type = TYPE_100;
-        mSuccessTypeEnum = SuccessTypeEnum.getEnumForType(type);
+
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_success;
+        return R.layout.activity_lock_success;
     }
 
     @OnClick(R.id.Btn)

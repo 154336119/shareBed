@@ -15,7 +15,7 @@
         app:qrcv_cornerDisplayType="center"
         app:qrcv_cornerLength="40dp"
         app:qrcv_cornerSize="6dp"
-        app:qrcv_customScanLineDrawable="@drawable/scan_icon_scanline"
+        app:qrcv_customScanLineDrawable="@mipmap/saomiaotiao"
         app:qrcv_isAutoZoom="true"
         app:qrcv_isBarcode="false"
         app:qrcv_isOnlyDecodeScanBoxArea="false"

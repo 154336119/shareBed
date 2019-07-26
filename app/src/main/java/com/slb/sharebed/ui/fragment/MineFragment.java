@@ -1,6 +1,8 @@
 package com.slb.sharebed.ui.fragment;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.slb.frame.ui.fragment.BaseMvpFragment;
 import com.slb.sharebed.R;
+import com.slb.sharebed.http.bean.UserEntity;
 import com.slb.sharebed.ui.contract.MineContract;
 import com.slb.sharebed.ui.presenter.MinePresenter;
 
@@ -70,7 +74,7 @@ public class MineFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
-
+        registerLiveDateBus();
         return rootView;
     }
 
@@ -100,5 +104,24 @@ public class MineFragment
             case R.id.RlDeposit:
                 break;
         }
+    }
+
+    public void registerLiveDateBus(){
+        LiveEventBus.get().with("User_info", UserEntity.class)
+                .observe(this, new Observer<UserEntity>() {
+                    @Override
+                    public void onChanged(@Nullable UserEntity entity) {
+                        if(entity.getIsDeposit() == 1){
+                            IvNoDeposit.setVisibility(View.GONE);
+                        }else{
+                            IvNoDeposit.setVisibility(View.VISIBLE);
+                        }
+                        if(entity.getIsIdentified() == 1){
+                            IvAuthState.setImageResource(R.mipmap.yirenzheng);
+                        }else{
+                            IvAuthState.setImageResource(R.mipmap.qurenzheng);
+                        }
+                    }
+                });
     }
 }
