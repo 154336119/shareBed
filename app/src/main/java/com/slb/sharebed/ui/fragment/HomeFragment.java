@@ -47,6 +47,7 @@ public class HomeFragment
 
     public static HomeFragment newInstance() {
         HomeFragment instance = new HomeFragment();
+
         return instance;
     }
 
