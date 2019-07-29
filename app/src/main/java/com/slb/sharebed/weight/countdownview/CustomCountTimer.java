@@ -11,39 +11,34 @@ import android.os.SystemClock;
  * Created by iWgang on 15/10/18.
  * https://github.com/iwgang/CountdownView
  */
-public abstract class CustomCountDownTimer {
+public abstract class CustomCountTimer {
     private static final int MSG = 1;
-    private final long mMillisInFuture;
+    private  long mMillisInFuture = 0;
     private final long mCountdownInterval;
-    private long mStopTimeInFuture;
     private long mPauseTimeInFuture;
     private boolean isStop = false;
     private boolean isPause = false;
 
     /**
-     * @param millisInFuture    总倒计时时间
-     * @param countDownInterval 倒计时间隔时间
+     * @param countDownInterval 计时间隔时间
      */
-    public CustomCountDownTimer(long millisInFuture, long countDownInterval) {
+    public CustomCountTimer( long countDownInterval) {
         // 解决秒数有时会一开始就减去了2秒问题（如10秒总数的，刚开始就8999，然后没有不会显示9秒，直接到8秒）
-        if (countDownInterval > 1000) millisInFuture += 15;
-        mMillisInFuture = millisInFuture;
         mCountdownInterval = countDownInterval;
     }
 
-    private synchronized CustomCountDownTimer start(long millisInFuture) {
+    private synchronized CustomCountTimer start(long millisInFuture) {
         isStop = false;
-        if (millisInFuture <= 0) {
-            onFinish();
-            return this;
-        }
-        mStopTimeInFuture = SystemClock.elapsedRealtime() + millisInFuture;
+//        if (millisInFuture <= 0) {
+//            onFinish();
+//            return this;
+//        }
         mHandler.sendMessage(mHandler.obtainMessage(MSG));
         return this;
     }
 
     /**
-     * 开始倒计时
+     * 开始计时
      */
     public synchronized final void start() {
         start(mMillisInFuture);
@@ -58,14 +53,13 @@ public abstract class CustomCountDownTimer {
     }
 
     /**
-     * 暂时倒计时
+     * 暂时计时
      * 调用{@link #restart()}方法重新开始
      */
     public synchronized final void pause() {
         if (isStop) return ;
 
         isPause = true;
-        mPauseTimeInFuture = mStopTimeInFuture - SystemClock.elapsedRealtime();
         mHandler.removeMessages(MSG);
     }
 
@@ -86,7 +80,7 @@ public abstract class CustomCountDownTimer {
     public abstract void onTick(long millisUntilFinished);
 
     /**
-     * 倒计时结束回调
+     * 计时结束
      */
     public abstract void onFinish();
 
@@ -96,27 +90,20 @@ public abstract class CustomCountDownTimer {
         @Override
         public void handleMessage(Message msg) {
 
-            synchronized (CustomCountDownTimer.this) {
+            synchronized (CustomCountTimer.this) {
                 if (isStop || isPause) {
                     return;
                 }
 
-                final long millisLeft = mMillisInFuture - SystemClock.elapsedRealtime();
-                if (millisLeft <= 0) {
-                    onFinish();
-                } else {
-                    long lastTickStart = SystemClock.elapsedRealtime();
-                    onTick(millisLeft);
+                mMillisInFuture = mMillisInFuture + mCountdownInterval;
+                onTick(mMillisInFuture);
 
-                    // take into account user's onTick taking time to execute
-                    long delay = lastTickStart + mCountdownInterval - SystemClock.elapsedRealtime();
+                // take into account user's onTick taking time to execute
+                long delay = 1000;
 
-                    // special case: user's onTick took more than interval to
-                    // complete, skip to next interval
-                    while (delay < 0) delay += mCountdownInterval;
-
-                    sendMessageDelayed(obtainMessage(MSG), delay);
-                }
+                // special case: user's onTick took more than interval to
+                // complete, skip to next interval
+                sendMessageDelayed(obtainMessage(MSG), delay);
             }
         }
     };

@@ -25,26 +25,33 @@
         android:layout_height="1dp"
         android:background="#ececec"/>
     <RelativeLayout
+        android:id="@+id/RlBg"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/Tv01"
+        <LinearLayout
+            android:id="@+id/unOpenlockView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="欢迎您使用"
-            android:textSize="24sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="100dp"
-            android:textColor="@color/white"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="共享床位APP"
-            android:textSize="36sp"
-            android:layout_marginLeft="20dp"
-            android:layout_below="@+id/Tv01"
-            android:textColor="@color/white"
-            android:layout_marginTop="10dp"/>
+            android:orientation="vertical"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="欢迎您使用"
+                android:textSize="24sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="100dp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="共享床位APP"
+                android:textSize="36sp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/Tv01"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/IvSecurity"
@@ -86,28 +93,50 @@
             android:src="@mipmap/saomayongchuang"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="60dp"/>
-        <com.slb.sharebed.weight.countdownview.CountdownView
-            android:id="@+id/CountdownView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/openlockView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:isHideTimeBackground="false"
-            app:timeBgRadius="@dimen/distance_5"
-            app:timeBgColor="#f1f1f1"
-            app:isShowTimeBgDivisionLine="false"
-            app:isShowHour="true"
-            app:isShowMinute="true"
-            app:isShowSecond="true"
-            app:timeTextColor="#686868"
-            app:timeTextSize="15sp"
-            app:isTimeTextBold="true"
-            app:suffixGravity="center"
-            app:suffixTextColor="#b8b8b8"
-            app:suffixTextSize="12sp"
-            app:suffixDay="天"
-            app:suffixHour="时"
-            app:suffixMinute="分"
-            app:suffixSecond="秒"
-            android:layout_marginBottom="6dp"
-            android:layout_above="@+id/Btn"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="100dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已成功扫码开锁\n祝您好梦!"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textColor="@color/white"/>
+            <com.slb.sharebed.weight.countdownview.CountdownView
+                android:id="@+id/countdownview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:isHideTimeBackground="false"
+                app:timeBgRadius="10dp"
+                app:timeBgColor="#ffffff"
+                app:isShowTimeBgDivisionLine="false"
+                app:isShowHour="true"
+                app:isShowMinute="true"
+                app:isShowSecond="true"
+                app:isShowDay="true"
+                app:timeTextColor="#0293ff"
+                app:timeTextSize="45sp"
+                app:isTimeTextBold="true"
+                app:suffixGravity="center"
+                app:suffixTextColor="#ffffff"
+                app:suffixTextSize="55sp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:id="@+id/TvFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="计费价格：50元/小时"
+                android:textSize="14sp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/distance_20"/>
+        </LinearLayout>
+
     </RelativeLayout>
 </LinearLayout>

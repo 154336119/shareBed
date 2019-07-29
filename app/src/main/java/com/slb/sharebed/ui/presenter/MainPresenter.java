@@ -73,6 +73,7 @@ public class MainPresenter extends AbstractBasePresenter<MainContract.IView>
 					@Override
 					public void onNext(ConfigEntity entity) {
 						Base.setConfigEntity(entity);
+						LiveEventBus.get().with("Config_info").post(entity);
 					}
 
 					@Override

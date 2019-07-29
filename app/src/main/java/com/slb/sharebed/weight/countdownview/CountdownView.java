@@ -16,7 +16,7 @@ import com.slb.sharebed.R;
  */
 public class CountdownView extends View {
     private BaseCountdown mCountdown;
-    private CustomCountDownTimer mCustomCountDownTimer;
+    private CustomCountTimer mCustomCountDownTimer;
     private OnCountdownEndListener mOnCountdownEndListener;
     private OnCountdownIntervalListener mOnCountdownIntervalListener;
 
@@ -109,7 +109,7 @@ public class CountdownView extends View {
      * @param millisecond millisecond
      */
     public void start(long millisecond) {
-        if (millisecond <= 0) return;
+//        if (millisecond <= 0) return;
 
         mPreviousIntervalCallbackTime = 0;
 
@@ -126,7 +126,7 @@ public class CountdownView extends View {
             countDownInterval = 1000;
         }
 
-        mCustomCountDownTimer = new CustomCountDownTimer(millisecond, countDownInterval) {
+        mCustomCountDownTimer = new CustomCountTimer(countDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateShow(millisUntilFinished);

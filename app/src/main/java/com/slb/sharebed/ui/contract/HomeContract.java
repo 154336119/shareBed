@@ -9,7 +9,9 @@ import com.slb.frame.ui.view.IBaseLoadingDialogView;
 
 public class HomeContract {
 	public interface IView extends IBaseLoadingDialogView {
+		void showBg();
 	}
 	public interface IPresenter<T> extends IBaseFragmentPresenter<T> {
+		void getConfigInfo();
 	}
 }

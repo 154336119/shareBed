@@ -178,7 +178,7 @@ class BackgroundCountdown extends BaseCountdown {
             // initialize second background border rectF
             if (isShowTimeBgBorder) {
                 mSecondBgBorderRectF = new RectF(mSecondLeft, topPaddingSize, mSecondLeft + mTimeBgSize + (mTimeBgBorderSize * 2), topPaddingSize + mTimeBgSize + (mTimeBgBorderSize * 2));
-                mSecondBgRectF = new RectF(mSecondLeft + mTimeBgBorderSize, topPaddingSize + mTimeBgBorderSize, mSecondLeft + mTimeBgSize + mTimeBgBorderSize, topPaddingSize + mTimeBgSize + mTimeBgBorderSize);
+                mSecondBgRectF = new RectF(mSecondLeft, topPaddingSize, (mSecondLeft + mTimeBgSize + mTimeBgBorderSize), topPaddingSize + mTimeBgSize + mTimeBgBorderSize);
             } else {
                 mSecondBgRectF = new RectF(mSecondLeft, topPaddingSize, mSecondLeft + mTimeBgSize, topPaddingSize + mTimeBgSize);
             }
@@ -200,6 +200,7 @@ class BackgroundCountdown extends BaseCountdown {
                 initHasBackgroundTextBaseY(mSecondBgRectF);
             }
         }
+
     }
 
     private float getSuffixTextBaseLine(String suffixText, float topPaddingSize) {

@@ -57,7 +57,7 @@ public interface ComService {
      * 用户-配置
      */
     @FormUrlEncoded
-    @POST("/app/config/al"  )
+    @POST("/app/config/all"  )
     Observable<HttpMjResult<ConfigEntity>> getConfig(@Field("token") String token);
 
 
