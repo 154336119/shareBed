@@ -1,27 +1,23 @@
 package com.slb.sharebed.ui.fragment;
 
 import android.Manifest;
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
-import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.slb.frame.ui.fragment.BaseMvpFragment;
 import com.slb.frame.utils.ActivityUtil;
-import com.slb.frame.utils.ImageLoadUtil;
 import com.slb.sharebed.Base;
 import com.slb.sharebed.R;
-import com.slb.sharebed.http.bean.ConfigEntity;
-import com.slb.sharebed.http.bean.UserEntity;
 import com.slb.sharebed.ui.activity.NoDepositAcitivty;
 import com.slb.sharebed.ui.activity.NoIdentifieActivity;
 import com.slb.sharebed.ui.activity.ScanAcitivty;
@@ -55,6 +51,12 @@ public class HomeFragment
     CountdownView countdownview;
     @BindView(R.id.RlBg)
     RelativeLayout RlBg;
+    @BindView(R.id.lockView)
+    LinearLayout lockView;
+    @BindView(R.id.TvFee)
+    TextView TvFee;
+    @BindView(R.id.openView)
+    LinearLayout openView;
 
     @Override
     protected boolean hasToolbar() {
@@ -107,7 +109,7 @@ public class HomeFragment
             case R.id.IvSetting:
                 break;
             case R.id.IvKefu:
-                countdownview.start(0);
+                countdownview.start(345404 * 1000);
                 break;
             case R.id.IvSacn:
                 if (Base.getUserEntity().getIsDeposit() == 0) {
@@ -147,5 +149,21 @@ public class HomeFragment
                         this.view.setBackground(resource.getCurrent());
                     }
                 });
+    }
+
+    @Override
+    public void showLockView() {
+        lockView.setVisibility(View.VISIBLE);
+        openView.setVisibility(View.GONE);
+        IvSacn.setImageResource(R.mipmap.saomayongchuang);
+    }
+
+    @Override
+    public void showOpenView(Long time) {
+        openView.setVisibility(View.VISIBLE);
+        lockView.setVisibility(View.GONE);
+        IvSacn.setImageResource(R.mipmap.jieshuyongchuang_open);
+        TvFee.setText("计时费用："+Base.getConfigEntity().getBED_SINGLE_PRICE().getConfig_value()+"元/小时");
+        countdownview.start(time * 1000);
     }
 }

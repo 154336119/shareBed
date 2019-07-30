@@ -1,6 +1,8 @@
 package com.slb.sharebed.http.service;
 
+import com.slb.sharebed.http.bean.BedQueryEntity;
 import com.slb.sharebed.http.bean.ConfigEntity;
+import com.slb.sharebed.http.bean.OrderFeeDetailEntity;
 import com.slb.sharebed.http.bean.PayTypeEntity;
 import com.slb.sharebed.http.bean.UpdateEntity;
 import com.slb.sharebed.http.bean.UserEntity;
@@ -60,6 +62,19 @@ public interface ComService {
     @POST("/app/config/all"  )
     Observable<HttpMjResult<ConfigEntity>> getConfig(@Field("token") String token);
 
+    /**
+     * 用户-查询当前有没有使用中的床位订单
+     */
+    @FormUrlEncoded
+    @POST("/app/bed/query" )
+    Observable<HttpMjResult<BedQueryEntity>> getUsedBedInfo(@Field("token") String token);
+
+    /**
+     * 用户-查询床位消费明细
+     */
+    @FormUrlEncoded
+    @POST("/app/bed/orderFee" )
+    Observable<HttpMjResult<OrderFeeDetailEntity>> getOrderFee(@Field("token") String token);
 
     /**
      * 升级

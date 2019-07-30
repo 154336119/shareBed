@@ -126,7 +126,7 @@ public class CountdownView extends View {
             countDownInterval = 1000;
         }
 
-        mCustomCountDownTimer = new CustomCountTimer(countDownInterval) {
+        mCustomCountDownTimer = new CustomCountTimer(millisecond,countDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateShow(millisUntilFinished);
