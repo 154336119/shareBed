@@ -22,7 +22,11 @@ import android.widget.TextView;
 import com.jaeger.library.StatusBarUtil;
 import com.orhanobut.logger.Logger;
 import com.slb.frame.ui.activity.BaseActivity;
+import com.slb.frame.ui.activity.BaseMvpActivity;
 import com.slb.sharebed.R;
+import com.slb.sharebed.ui.contract.BindPhoneContract;
+import com.slb.sharebed.ui.contract.ScanContract;
+import com.slb.sharebed.ui.presenter.ScanPersenter;
 import com.slb.sharebed.util.AndroidAdjustResizeBugFix;
 import com.slb.sharebed.util.KeyBoardChangeListener;
 
@@ -32,8 +36,8 @@ import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
-public class ScanAcitivty extends BaseActivity implements QRCodeView.Delegate {
-
+public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContract.IPresenter>
+        implements  QRCodeView.Delegate ,ScanContract.IView {
 
     @BindView(R.id.zxingview)
     ZXingView mZXingView;
@@ -219,6 +223,19 @@ public class ScanAcitivty extends BaseActivity implements QRCodeView.Delegate {
         }
     }
 
+    @Override
+    public ScanContract.IPresenter initPresenter() {
+        return new ScanPersenter();
+    }
 
+    @Override
+    public void openSuccess() {
+
+    }
+
+    @Override
+    public void openFailed() {
+
+    }
 }
 

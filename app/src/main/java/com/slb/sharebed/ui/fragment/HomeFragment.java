@@ -156,6 +156,7 @@ public class HomeFragment
         lockView.setVisibility(View.VISIBLE);
         openView.setVisibility(View.GONE);
         IvSacn.setImageResource(R.mipmap.saomayongchuang);
+        countdownview.pause();
     }
 
     @Override
