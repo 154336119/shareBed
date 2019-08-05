@@ -19,5 +19,6 @@ public class HomeContract {
 		void getConfigInfo();
 		void querUsedBedInfo();
 		void querOrderFee();
+		void bedFinish();
 	}
 }

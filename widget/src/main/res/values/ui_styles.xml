@@ -43,7 +43,7 @@
         <item name="android:textViewStyle">@style/BaseTextView</item>
         <item name="android:buttonStyle">@style/btn_bottom_single</item>
         <item name="android:editTextStyle">@style/edit_base</item>
-        <item name="buttonTextColor">@color/blue</item>
+        <item name="buttonTextColor">@color/colors_0293ff</item>
         <item name="buttonBg">@color/colors_0293ff</item>
         <item name="buttonBgClick">@color/colors_0293ff</item>
         <item name="buttonBgEnable">@color/colors_0293ff</item>

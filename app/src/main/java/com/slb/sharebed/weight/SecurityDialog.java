@@ -18,8 +18,11 @@ import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.Base;
 import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
+import com.slb.sharebed.ui.activity.NoIdentifieActivity;
 import com.slb.sharebed.ui.activity.WebViewActivity;
 
+import static com.slb.sharebed.MyConstants.url_addLinkman;
+import static com.slb.sharebed.MyConstants.url_addLinkman_change;
 import static com.slb.sharebed.MyConstants.url_linkman;
 
 @SuppressLint("ValidFragment")
@@ -47,34 +50,58 @@ public class SecurityDialog extends BottomSheetDialogFragment {
             public void onClick(View v) {
             }
         });
-        view.findViewById(R.id.RlUrgentPeople).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("url", MyConstants.h5Url + url_linkman
-                        + Base.getUserEntity().getToken());
-                bundle.putString("title","紧急联系人");
-                ActivityUtil.next(getActivity(), WebViewActivity.class,bundle,false);
-                dialog.cancel();
-            }
-        });
-        view.findViewById(R.id.RlAuth).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
-                        + Base.getUserEntity().getToken());
-                bundle.putString("title","实名认证");
-                ActivityUtil.next(getActivity(),WebViewActivity.class,bundle,false);
-                dialog.cancel();
-            }
-        });
 //
+        if (Base.getUserEntity().getIsIdentified() == 1) {
+            //已实名认证
+            ((TextView)view.findViewById(R.id.TvAuth)).setText("已认证");
+        }else if(Base.getUserEntity().getIsIdentified() == 3){
+            ((TextView)view.findViewById(R.id.TvAuth)).setText("提交审核");
+        }else{
+            //未实名认证
+            view.findViewById(R.id.RlAuth).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
+                            + Base.getUserEntity().getToken());
+                    bundle.putString("title","实名认证");
+                    ActivityUtil.next(getActivity(),WebViewActivity.class,bundle,false);
+                    dialog.cancel();
+                }
+            });
+        }
+
 //        //设置紧急联系人
 //        ((TextView)view.findViewById(R.id.TvUrgentPeople)).setText("");
-//        //实名认证
-//        ((TextView)view.findViewById(R.id.TvAuth)).setText("");
 
+        if (Base.getUserEntity().getHasContact()) {
+            //已设置紧急联系人
+            ((TextView)view.findViewById(R.id.TvUrgentPeople)).setText("已设置");
+            view.findViewById(R.id.RlUrgentPeople).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", MyConstants.h5Url + url_addLinkman_change
+                            + Base.getUserEntity().getToken());
+                    bundle.putString("title","紧急联系人");
+                    ActivityUtil.next(getActivity(), WebViewActivity.class,bundle,false);
+                    dialog.cancel();
+                }
+            });
+        }else{
+            //未设置紧急联系人
+            view.findViewById(R.id.RlUrgentPeople).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", MyConstants.h5Url + url_addLinkman
+                            + Base.getUserEntity().getToken());
+                    bundle.putString("title","紧急联系人");
+                    ActivityUtil.next(getActivity(), WebViewActivity.class,bundle,false);
+                    dialog.cancel();
+                }
+            });
+        }
         dialog.setContentView(view);
         mBehavior = BottomSheetBehavior.from((View) view.getParent());
         return dialog;

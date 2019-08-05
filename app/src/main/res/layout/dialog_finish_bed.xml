@@ -24,8 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_131313"
-        android:text="开锁失败"
-        android:drawableTop="@mipmap/jiesuoshibai"
+        android:text="是否结束用床？"
         android:gravity="center"
         android:layout_gravity="center"
         android:drawablePadding="15dp"
@@ -42,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="48dp"
-            android:text="拨打客服电话"
+            android:text="结束用床"
             android:layout_marginTop="60dp"
             style="@style/btn_bottom_stroke_gray"
             android:layout_marginRight="30dp"/>
@@ -52,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="48dp"
-            android:text="重试"
+            android:text="暂不结束"
             android:layout_marginTop="60dp"
             style="@style/btn_bottom_single_gradual"/>
     </LinearLayout>

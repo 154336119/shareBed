@@ -14,7 +14,7 @@ public class ResultException extends RuntimeException {
     /** 未知错误*/
     public static final int API_EXCEPTION_UNKNOWN = 999;
     /** 需要登录*/
-    public static final int API_EXCEPTION_NEED_LOGIN = 500;
+    public static final int API_EXCEPTION_NEED_LOGIN = 403;
     /** 资源不存在*/
     public static final int API_EXCEPTION_RESOURCE_NO_EXIST = 1001;
     /** 非法参数*/

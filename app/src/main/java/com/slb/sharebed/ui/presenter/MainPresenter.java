@@ -4,6 +4,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.slb.sharebed.Base;
 import com.slb.sharebed.http.RetrofitSerciveFactory;
 import com.slb.sharebed.http.bean.ConfigEntity;
+import com.slb.sharebed.http.bean.ContactBean;
 import com.slb.sharebed.http.bean.UpdateEntity;
 import com.slb.sharebed.http.bean.UserEntity;
 import com.slb.sharebed.ui.contract.MainContract;
@@ -13,6 +14,8 @@ import com.slb.frame.http2.rxjava.BindPrssenterOpterator;
 import com.slb.frame.http2.rxjava.HttpMjEntityFun;
 import com.slb.frame.ui.presenter.AbstractBasePresenter;
 import com.slb.frame.utils.rx.RxUtil;
+
+import java.util.List;
 
 
 /**
@@ -51,9 +54,10 @@ public class MainPresenter extends AbstractBasePresenter<MainContract.IView>
 					@Override
 					public void onNext(UserEntity entity) {
 						//测试
-						entity.setIsDeposit(1);
+//						entity.setIsDeposit(1);
 //						entity.setIsIdentified(1);
 						Base.setUserEntity(entity);
+						getContactInfo();
 						LiveEventBus.get().with("User_info").post(entity);
 					}
 
@@ -74,6 +78,30 @@ public class MainPresenter extends AbstractBasePresenter<MainContract.IView>
 					public void onNext(ConfigEntity entity) {
 						Base.setConfigEntity(entity);
 						LiveEventBus.get().with("Config_info").post(entity);
+					}
+
+					@Override
+					public void onStart() {
+					}
+				});
+	}
+
+	@Override
+	public void getContactInfo() {
+		RetrofitSerciveFactory.provideComService().getContactInfo(Base.getUserEntity().getToken())
+				.lift(new BindPrssenterOpterator<HttpMjResult<List<ContactBean>>>(this))
+				.compose(RxUtil.<HttpMjResult<List<ContactBean>>>applySchedulersForRetrofit())
+				.map(new HttpMjEntityFun<List<ContactBean>>())
+				.subscribe(new BaseSubscriber<List<ContactBean>>(this.mView) {
+					@Override
+					public void onNext(List<ContactBean> entity) {
+						UserEntity userEntity = Base.getUserEntity();
+						if(entity!=null && entity.size()>0){
+							userEntity.setHasContact(true);
+						}else {
+							userEntity.setHasContact(false);
+						}
+						Base.setUserEntity(userEntity);
 					}
 
 					@Override

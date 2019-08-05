@@ -47,6 +47,16 @@ public class UserEntity {
     private int state;
     private String createTime;
     private String token;
+    private Boolean hasContact;//有联系人
+
+    public Boolean getHasContact() {
+        return hasContact;
+    }
+
+    public void setHasContact(Boolean hasContact) {
+        this.hasContact = hasContact;
+    }
+
     public int getId() {
         return id;
     }

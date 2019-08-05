@@ -85,4 +85,19 @@ public class HomePresenter extends AbstractBaseFragmentPresenter<HomeContract.IV
                 });
 
     }
+
+    @Override
+    public void bedFinish() {
+        RetrofitSerciveFactory.provideComService().bedFinish(Base.getUserEntity().getToken())
+                .lift(new BindFragmentPrssenterOpterator<HttpMjResult< Object>>(this))
+                .compose(RxUtil.<HttpMjResult< Object>>applySchedulersForRetrofit())
+                .map(new HttpMjEntityFun< Object>())
+                .subscribe(new BaseSubscriber<Object>(this.mView) {
+                    @Override
+                    public void onNext(Object entity) {
+                        super.onNext(entity);
+                        querUsedBedInfo();
+                    }
+                });
+    }
 }

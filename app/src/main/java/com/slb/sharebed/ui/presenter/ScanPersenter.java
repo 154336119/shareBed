@@ -13,18 +13,22 @@ import com.slb.sharebed.ui.contract.ScanContract;
 public class ScanPersenter extends AbstractBasePresenter<ScanContract.IView> implements ScanContract.IPresenter<ScanContract.IView> {
     @Override
     public void beadOpen(String bedCode) {
-//        RetrofitSerciveFactory.provideComService().bedOpen(Base.getUserEntity().getToken(),bedCode)
-//                .lift(new BindPrssenterOpterator<HttpMjResult< Object>>(this))
-//                .compose(RxUtil.<HttpMjResult< Object>>applySchedulersForRetrofit())
-//                .map(new HttpMjEntityFun< Object>())
-//                .subscribe(new BaseSubscriber<Object>(this.mView) {
-//                    @Override
-//                    public void onNext(Object entity) {
-//                        super.onNext(entity);
-//                        mView.showMsg("验证码发送成功");
-//                        mView.showCountdown();
-//                        mView.varifyCodeSuccess();
-//                    }
-//                });
+        RetrofitSerciveFactory.provideComService().bedOpen(Base.getUserEntity().getToken(),bedCode)
+                .lift(new BindPrssenterOpterator<HttpMjResult< Object>>(this))
+                .compose(RxUtil.<HttpMjResult< Object>>applySchedulersForRetrofit())
+                .map(new HttpMjEntityFun< Object>())
+                .subscribe(new BaseSubscriber<Object>(this.mView) {
+                    @Override
+                    public void onNext(Object entity) {
+                        super.onNext(entity);
+                        mView.openSuccess();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        mView.openFailed();
+                    }
+                });
     }
 }

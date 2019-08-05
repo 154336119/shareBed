@@ -8,7 +8,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.slb.frame.ui.activity.BaseActivity;
+import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.Base;
+import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
 import com.slb.sharebed.util.FileUtils;
 import com.umeng.message.PushAgent;
@@ -22,6 +24,10 @@ import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.slb.sharebed.MyConstants.url_guide;
+import static com.slb.sharebed.MyConstants.url_law;
+import static com.slb.sharebed.MyConstants.url_service;
 
 /**
  * Created by juan on 2018/9/5.
@@ -38,8 +44,6 @@ public class SettingActivity extends BaseActivity {
     RelativeLayout RlClearCache;
     @BindView(R.id.RlAgreement)
     RelativeLayout RlAgreement;
-    @BindView(R.id.TvLoginOut)
-    TextView TvLoginOut;
     @BindView(R.id.RlSecurity)
     RelativeLayout RlSecurity;
     @BindView(R.id.RlLaw)
@@ -66,14 +70,21 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.RlAbout, R.id.RlClearCache, R.id.RlAgreement, R.id.RlSecurity, R.id.RlLaw,R.id.TvLoginOut})
+    @OnClick({R.id.RlAbout, R.id.RlClearCache, R.id.RlAgreement, R.id.RlSecurity, R.id.RlLaw})
     public void onViewClicked(View view) {
+        Bundle bundle = new Bundle();
         switch (view.getId()) {
             case R.id.RlSecurity:
+                ActivityUtil.next(this,AccountSecurityActivity.class);
                 break;
             case R.id.RlLaw:
+                bundle.putString("url", MyConstants.h5Url + url_law
+                        + Base.getUserEntity().getToken());
+                bundle.putString("title","法律声明与平台规则");
+                ActivityUtil.next(this, WebViewActivity.class,bundle,false);
                 break;
             case R.id.RlAbout:
+                ActivityUtil.next(this,AboutUsActivity.class);
                 break;
             case R.id.RlClearCache:
                 showDialog("提示！", "确定删除缓存？",
@@ -118,24 +129,13 @@ public class SettingActivity extends BaseActivity {
                         });
                 break;
             case R.id.RlAgreement:
+                bundle.putString("url", MyConstants.h5Url + url_guide
+                        + Base.getUserEntity().getToken());
+                bundle.putString("title","用户指南");
+                ActivityUtil.next(this, WebViewActivity.class,bundle,false);
 //                ActivityUtil.next(this,UserAgreementActivity.class);
                 break;
-            case R.id.TvLoginOut:
-                PushAgent mPushAgent = PushAgent.getInstance(this);
-                mPushAgent.deleteAlias("xikeqiche", Base.getUserEntity().getToken(), new UTrack.ICallBack() {
-                    @Override
-                    public void onMessage(boolean b, String s) {
 
-                    }
-                });
-                Base.setUserEntity(null);
-
-                Intent intent = new Intent(this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-//                ActivityUtil.next(this,LoginActivity.class,null,true);
-                finish();
-                break;
         }
     }
 }

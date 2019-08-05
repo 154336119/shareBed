@@ -19,11 +19,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
 import com.jaeger.library.StatusBarUtil;
 import com.orhanobut.logger.Logger;
 import com.slb.frame.ui.activity.BaseActivity;
 import com.slb.frame.ui.activity.BaseMvpActivity;
+import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.R;
+import com.slb.sharebed.event.BedOpenEvent;
 import com.slb.sharebed.ui.contract.BindPhoneContract;
 import com.slb.sharebed.ui.contract.ScanContract;
 import com.slb.sharebed.ui.presenter.ScanPersenter;
@@ -154,6 +157,7 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
     public void onScanQRCodeSuccess(String result) {
         Log.i(TAG, "result:" + result);
         vibrate();
+        mPresenter.beadOpen(result);
         mZXingView.startSpot(); // 开始识别
     }
 
@@ -172,10 +176,11 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
         return R.layout.activity_scan;
     }
 
-    @OnClick({R.id.TvHandInput, R.id.TvFlashlight, R.id.BtnUsedBed, R.id.BtnScanCode})
+    @OnClick({R.id.TvHandInput, R.id.TvFlashlight, R.id.BtnUsedBed, R.id.BtnScanCode,R.id.IvClose})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.BtnUsedBed:
+                mPresenter.beadOpen(EtInput.getText().toString());
                 break;
             case R.id.BtnScanCode:
                 Animation animBottomOut = AnimationUtils.loadAnimation(ScanAcitivty.this,
@@ -202,6 +207,9 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
                     isLightOpen = true;
                     mZXingView.openFlashlight(); // 打开闪光灯
                 }
+                break;
+            case R.id.IvClose:
+                finish();
                 break;
         }
     }
@@ -230,12 +238,13 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
 
     @Override
     public void openSuccess() {
-
+        RxBus.get().post(new BedOpenEvent());
+        ActivityUtil.next(this,LockSuccessActivity.class,null,true);
     }
 
     @Override
     public void openFailed() {
-
+        ActivityUtil.next(this,LockFaildDialogAcitivty.class);
     }
 }
 

@@ -16,5 +16,6 @@ public class MainContract {
 		void getUpdateInfo();
 		void getUserInfo();
 		void getConfigInfo();
+		void getContactInfo();
 	}
 }

@@ -14,13 +14,21 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.slb.frame.ui.fragment.BaseMvpFragment;
 import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.Base;
+import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
+import com.slb.sharebed.event.BedFinishEvent;
+import com.slb.sharebed.event.BedOpenEvent;
+import com.slb.sharebed.event.RefreshUserInfoEvent;
+import com.slb.sharebed.ui.activity.FinshBedDialogAcitivty;
 import com.slb.sharebed.ui.activity.NoDepositAcitivty;
 import com.slb.sharebed.ui.activity.NoIdentifieActivity;
 import com.slb.sharebed.ui.activity.ScanAcitivty;
+import com.slb.sharebed.ui.activity.SettingActivity;
+import com.slb.sharebed.ui.activity.WebViewActivity;
 import com.slb.sharebed.ui.contract.HomeContract;
 import com.slb.sharebed.ui.presenter.HomePresenter;
 import com.slb.sharebed.weight.SecurityDialog;
@@ -32,6 +40,9 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.leo.permission.PermissionRequest;
 import cn.leo.permission.PermissionRequestFailedCallback;
+
+import static com.slb.sharebed.MyConstants.url_linkman;
+import static com.slb.sharebed.MyConstants.url_service;
 
 
 public class HomeFragment
@@ -84,6 +95,7 @@ public class HomeFragment
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         mPresenter.getConfigInfo();
+        mPresenter.querUsedBedInfo();
         return rootView;
     }
 
@@ -107,23 +119,36 @@ public class HomeFragment
                 dialog.show(_mActivity.getSupportFragmentManager(), "Dialog");
                 break;
             case R.id.IvSetting:
+                ActivityUtil.next(getActivity(), SettingActivity.class);
                 break;
             case R.id.IvKefu:
-                countdownview.start(345404 * 1000);
+              //  countdownview.start(345404 * 1000);
+                Bundle bundle = new Bundle();
+                bundle.putString("url", MyConstants.h5Url + url_service
+                        + Base.getUserEntity().getToken());
+                bundle.putString("title","客服中心");
+                ActivityUtil.next(getActivity(), WebViewActivity.class,bundle,false);
                 break;
             case R.id.IvSacn:
-                if (Base.getUserEntity().getIsDeposit() == 0) {
-                    //未交押金
-                    ActivityUtil.next(_mActivity, NoDepositAcitivty.class);
-                    return;
-                }
-                if (Base.getUserEntity().getIsIdentified() == 0) {
-                    //未实名认证
-                    ActivityUtil.next(_mActivity, NoIdentifieActivity.class);
-                    return;
+                if(lockView.getVisibility() == View.VISIBLE){
+                    //关锁状态
+                    if (Base.getUserEntity().getIsDeposit() == 0) {
+                        //未交押金
+                        ActivityUtil.next(_mActivity, NoDepositAcitivty.class);
+                        return;
+                    }
+                    if (Base.getUserEntity().getIsIdentified() == 0) {
+                        //未实名认证
+                        ActivityUtil.next(_mActivity, NoIdentifieActivity.class);
+                        return;
+                    }
+
+                    toScanActivity();
+                }else{
+                    //开锁状态
+                    ActivityUtil.next(_mActivity, FinshBedDialogAcitivty.class);
                 }
 
-                toScanActivity();
                 break;
         }
     }
@@ -156,7 +181,7 @@ public class HomeFragment
         lockView.setVisibility(View.VISIBLE);
         openView.setVisibility(View.GONE);
         IvSacn.setImageResource(R.mipmap.saomayongchuang);
-        countdownview.pause();
+        TvFee.setVisibility(View.GONE);
     }
 
     @Override
@@ -166,5 +191,21 @@ public class HomeFragment
         IvSacn.setImageResource(R.mipmap.jieshuyongchuang_open);
         TvFee.setText("计时费用："+Base.getConfigEntity().getBED_SINGLE_PRICE().getConfig_value()+"元/小时");
         countdownview.start(time * 1000);
+    }
+
+    @Subscribe
+    public void onBedOpenEvent(BedOpenEvent event) {
+        mPresenter.querUsedBedInfo();
+    }
+
+    @Subscribe
+    public void onBedFinishEvent(BedFinishEvent event) {
+        mPresenter.bedFinish();
+    }
+
+
+    @Override
+    protected boolean rxBusRegist() {
+        return true;
     }
 }

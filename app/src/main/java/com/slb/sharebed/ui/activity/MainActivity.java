@@ -10,6 +10,8 @@ import android.widget.RadioGroup;
 
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.jaeger.library.StatusBarUtil;
+import com.slb.frame.utils.rx.RxBus;
+import com.slb.sharebed.Base;
 import com.slb.sharebed.MyConstants;
 import com.slb.sharebed.R;
 import com.slb.sharebed.event.RefreshUserInfoEvent;
@@ -29,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Action1;
 
 public class MainActivity extends BaseMvpActivity<MainContract.IView, MainContract.IPresenter>implements MainContract.IView , RadioGroup.OnCheckedChangeListener{
     private Subscription loginOutSub;
@@ -94,13 +97,13 @@ public class MainActivity extends BaseMvpActivity<MainContract.IView, MainContra
         prePosition = 0;
         bottomBar.setOnCheckedChangeListener(this);
         bottomBar.check(R.id.rb_home);
-//        loginOutObservable = RxBus.getInstance().register(RESPONSE_EXCEPTION_LOGINOUT);
-//        loginOutSub = loginOutObservable.subscribeOn(rx.android.schedulers.AndroidSchedulers.mainThread())
-//                .unsubscribeOn(rx.android.schedulers.AndroidSchedulers.mainThread())
-//                .observeOn(rx.android.schedulers.AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<ResponseExceptionEventArgs>() {
-//                    @Override
-//                    public void call(ResponseExceptionEventArgs args) {
+        loginOutObservable = RxBus.getInstance().register(RESPONSE_EXCEPTION_LOGINOUT);
+        loginOutSub = loginOutObservable.subscribeOn(rx.android.schedulers.AndroidSchedulers.mainThread())
+                .unsubscribeOn(rx.android.schedulers.AndroidSchedulers.mainThread())
+                .observeOn(rx.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribe(new Action1<ResponseExceptionEventArgs>() {
+                    @Override
+                    public void call(ResponseExceptionEventArgs args) {
 //                        PushAgent mPushAgent = PushAgent.getInstance(Base.getContext());
 //                        mPushAgent.deleteAlias("xikeqiche", Base.getUserEntity().getToken(), new UTrack.ICallBack() {
 //                            @Override
@@ -108,13 +111,13 @@ public class MainActivity extends BaseMvpActivity<MainContract.IView, MainContra
 //
 //                            }
 //                        });
-//                        Base.setUserEntity(null);
-//                        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                });
+                        Base.setUserEntity(null);
+                        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
 
     }
 
