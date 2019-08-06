@@ -30,7 +30,7 @@ public class MyConstants {
 
     public static final String h5Url = "http://h5.gxcw.meijiangkj.com";
 
-    public static final String WX_APP_ID = "wx6e626c6693c3c055";
+    public static final String WX_APP_ID = "wxce496ac3fc1d955f";
 
     public static final String appendCss = "<html><style>.divtest1 { line-height:1.5;letter-spacing:1.0px;text-align:justify;color:#333333;margin-right:15px;margin-left:15px;margin-top:15px;} .divtest1 img {  margin:auto;max-width:100%;min-width:100%;vertical-align:middle;}}</style><div class=\"divtest1\">";
     /**

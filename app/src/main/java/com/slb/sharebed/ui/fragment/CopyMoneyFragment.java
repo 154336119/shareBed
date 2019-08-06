@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.alipay.sdk.app.PayTask;
@@ -29,7 +27,6 @@ import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.jaeger.library.StatusBarUtil;
 import com.orhanobut.logger.Logger;
-import com.slb.frame.ui.fragment.BaseFragment;
 import com.slb.frame.ui.fragment.BaseMvpFragment;
 import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.Base;
@@ -44,11 +41,8 @@ import com.slb.sharebed.http.bean.WebBean;
 import com.slb.sharebed.ui.activity.LoginActivity;
 import com.slb.sharebed.ui.activity.MainActivity;
 import com.slb.sharebed.ui.activity.WebViewActivity;
-import com.slb.sharebed.ui.contract.WebViewContract;
 import com.slb.sharebed.ui.contract.WebViewFragmentContract;
 import com.slb.sharebed.ui.presenter.WebViewFragmentPresenter;
-import com.slb.sharebed.ui.presenter.WebViewPresenter;
-import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -63,7 +57,7 @@ import butterknife.Unbinder;
 
 import static com.slb.sharebed.MyConstants.url_token;
 
-public class MoneyFragment extends BaseMvpFragment<WebViewFragmentContract.IView, WebViewFragmentContract.IPresenter>
+public class CopyMoneyFragment extends BaseMvpFragment<WebViewFragmentContract.IView, WebViewFragmentContract.IPresenter>
         implements WebViewFragmentContract.IView {
     Unbinder unbinder;
     @BindView(R.id.webView)
@@ -81,8 +75,8 @@ public class MoneyFragment extends BaseMvpFragment<WebViewFragmentContract.IView
     private static final int SDK_PAY_FLAG = 1;
 
 
-    public static MoneyFragment newInstance() {
-        MoneyFragment fragment = new MoneyFragment();
+    public static CopyMoneyFragment newInstance() {
+        CopyMoneyFragment fragment = new CopyMoneyFragment();
         return fragment;
     }
 

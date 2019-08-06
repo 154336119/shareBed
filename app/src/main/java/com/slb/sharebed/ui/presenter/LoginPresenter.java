@@ -24,6 +24,7 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +70,12 @@ public class LoginPresenter extends AbstractBasePresenter<LoginContract.IView>
 
 	@Override
 	public void thirdLogin( SHARE_MEDIA platform, UMShareAPI mShareAPI, Activity context) {
+		final Map<String, String> params = new HashMap<>();
+		if (platform == SHARE_MEDIA.WEIXIN) {
+			params.put("platform", "1");
+		} else if (platform == SHARE_MEDIA.QQ) {
+			params.put("platform", "2");
+		}
 		if(!isWeixinAvilible(context)){
 			mView.showMsg(context.getString(R.string.please_install_weixin));
 			return;
@@ -83,7 +90,7 @@ public class LoginPresenter extends AbstractBasePresenter<LoginContract.IView>
 			@Override
 			public void onComplete(final SHARE_MEDIA share_media, int i, final Map<String, String> map) {
 				Logger.d("========================="+map);
-				RetrofitSerciveFactory.provideComService().loginThird(map.get("uid"),map.get("name"),map.get("iconurl"),1)
+				RetrofitSerciveFactory.provideComService().loginThird(map.get("uid"),params.get("platform"),map.get("name"),map.get("iconurl"),1)
 						.lift(new BindPrssenterOpterator<HttpMjResult<UserEntity>>(LoginPresenter.this))
 						.compose(RxUtil.<HttpMjResult<UserEntity>>applySchedulersForRetrofit())
 						.map(new HttpMjEntityFun<UserEntity>())
@@ -92,6 +99,14 @@ public class LoginPresenter extends AbstractBasePresenter<LoginContract.IView>
 							public void onNext(UserEntity entity) {
 								super.onNext(entity);
 								setLoginUserInfo(entity);
+							}
+
+							@Override
+							public void onError(Throwable e) {
+								if (e.getMessage().equals("账号不存在")){
+									map.put("platform",params.get("platform"));
+									mView.toBindPhonePage(map);
+								}
 							}
 						});
 			}

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.hwangjr.rxbus.RxBus;
 import com.orhanobut.logger.Logger;
 import com.slb.frame.http2.retrofit.HttpMjResult;
 import com.slb.frame.http2.rxjava.BaseSubscriber;
@@ -14,6 +15,7 @@ import com.slb.frame.ui.presenter.AbstractBasePresenter;
 import com.slb.frame.utils.rx.RxUtil;
 import com.slb.sharebed.Base;
 import com.slb.sharebed.R;
+import com.slb.sharebed.event.FinishAcitivtyEvent;
 import com.slb.sharebed.http.RetrofitSerciveFactory;
 import com.slb.sharebed.http.bean.UserEntity;
 import com.slb.sharebed.ui.contract.LoginContract;

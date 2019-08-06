@@ -111,8 +111,14 @@ dependencies {
     compile 'com.mikepenz:fontawesome-typeface:4.4.0.1@aar'
     compile 'com.mikepenz:crossfader:1.5.0@aar'
     compile 'com.mikepenz:iconics-core:2.8.0@aar'
-
     compile 'com.jaeger.statusbarutil:library:1.5.1'
+    // 分享
+    compile  'com.umeng.umsdk:common:1.5.4'
+    compile 'com.umeng.umsdk:share-core:6.9.4'
+    compile 'com.umeng.umsdk:share-wx:6.9.4'
+    compile 'com.umeng.umsdk:utdid:1.1.5.3'
+    //PushSDK
+    implementation 'com.umeng.umsdk:push:5.0.2'
 }
 
 apply from: './frame-push.gradle'

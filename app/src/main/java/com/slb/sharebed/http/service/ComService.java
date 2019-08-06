@@ -37,8 +37,9 @@ public interface ComService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/app/user/login/wechat")
+    @POST("/app/user/login/qqWechat")
     Observable<HttpMjResult<UserEntity>> loginThird(@Field("openid") String openid,
+                                                    @Field("type") String type,
                                                     @Field("nickName") String nickName,
                                                     @Field("logo") String logo,
                                                     @Field("platform") int platform);
@@ -121,10 +122,18 @@ public interface ComService {
 
 
     /**
-     *  用户信息
+     *  开锁
      */
     @FormUrlEncoded
     @POST("/app/bed/open" )
     Observable<HttpMjResult<Object>> bedOpen(@Field("token") String token,@Field("code") String code);
 
+    /**
+     *  第三方登录绑定手机
+     */
+    @FormUrlEncoded
+    @POST("/app/user/bind/qqWechat" )
+    Observable<HttpMjResult<UserEntity>> bindQqWechat(@Field("openid") String openid,@Field("type") String type
+    ,@Field("nickName") String nickName,@Field("logo") String logo ,@Field("mobile") String mobile,@Field("verifyCode") String verifyCode
+    ,@Field("platform") String platform);
 }

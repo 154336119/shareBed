@@ -17,6 +17,7 @@ import com.slb.sharebed.R;
 import com.slb.sharebed.event.RefreshUserInfoEvent;
 import com.slb.sharebed.http.bean.UpdateEntity;
 import com.slb.sharebed.ui.contract.MainContract;
+import com.slb.sharebed.ui.fragment.CopyMoneyFragment;
 import com.slb.sharebed.ui.fragment.MoneyFragment;
 import com.slb.sharebed.ui.fragment.OrderFragment;
 import com.slb.sharebed.ui.presenter.MainPresenter;
@@ -74,7 +75,7 @@ public class MainActivity extends BaseMvpActivity<MainContract.IView, MainContra
         if (savedInstanceState == null) {
             mFragments[HOME_HOME] = HomeFragment.newInstance();
             mFragments[HOME_ORDER] = OrderFragment.newInstance();
-            mFragments[HOME_MONEY] = MoneyFragment.newInstance();
+            mFragments[HOME_MONEY] = CopyMoneyFragment.newInstance();
             mFragments[HOME_MINE] = MineFragment.newInstance();
             loadMultipleRootFragment(R.id.mainFrame, HOME_HOME,
                     mFragments[HOME_HOME],
@@ -84,7 +85,7 @@ public class MainActivity extends BaseMvpActivity<MainContract.IView, MainContra
         } else {
             mFragments[HOME_HOME] = findFragment(HomeFragment.class);
             mFragments[HOME_ORDER] = findFragment(OrderFragment.class);
-            mFragments[HOME_MONEY] = findFragment(MoneyFragment.class);
+            mFragments[HOME_MONEY] = findFragment(CopyMoneyFragment.class);
             mFragments[HOME_MINE] = findFragment(MineFragment.class);
         }
     }

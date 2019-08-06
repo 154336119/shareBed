@@ -8,10 +8,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
 import com.jaeger.library.StatusBarUtil;
 import com.slb.frame.ui.activity.BaseMvpActivity;
 import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.R;
+import com.slb.sharebed.event.FinishAcitivtyEvent;
 import com.slb.sharebed.ui.contract.BindPhoneContract;
 import com.slb.sharebed.ui.contract.RegisterContract;
 import com.slb.sharebed.ui.presenter.BindPhonePresenter;
@@ -66,6 +68,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterContract.IView, Re
 
     @Override
     public void loginSuccess() {
+        RxBus.get().post(new FinishAcitivtyEvent());
         ActivityUtil.next(this, MainActivity.class, null, true);
     }
 

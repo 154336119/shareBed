@@ -137,7 +137,7 @@ public class HomeFragment
                         ActivityUtil.next(_mActivity, NoDepositAcitivty.class);
                         return;
                     }
-                    if (Base.getUserEntity().getIsIdentified() == 0) {
+                    if (Base.getUserEntity().getIsIdentified() == 0 || Base.getUserEntity().getIsIdentified() == 2) {
                         //未实名认证
                         ActivityUtil.next(_mActivity, NoIdentifieActivity.class);
                         return;

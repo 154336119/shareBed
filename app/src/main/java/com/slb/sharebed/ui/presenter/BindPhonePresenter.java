@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.hwangjr.rxbus.RxBus;
 import com.orhanobut.logger.Logger;
 import com.slb.frame.http2.retrofit.HttpMjResult;
 import com.slb.frame.http2.rxjava.BaseSubscriber;
@@ -14,6 +15,7 @@ import com.slb.frame.ui.presenter.AbstractBasePresenter;
 import com.slb.frame.utils.rx.RxUtil;
 import com.slb.sharebed.Base;
 import com.slb.sharebed.R;
+import com.slb.sharebed.event.FinishAcitivtyEvent;
 import com.slb.sharebed.http.RetrofitSerciveFactory;
 import com.slb.sharebed.http.bean.UserEntity;
 import com.slb.sharebed.ui.contract.BindPhoneContract;
@@ -52,25 +54,18 @@ public class BindPhonePresenter extends AbstractBasePresenter<BindPhoneContract.
 	}
 
 	@Override
-	public void bind(String openid, Integer type, String nickName, String logo, String mobile, String verifyCode, Integer platform) {
-
-	}
-
-	/**
-	 * 判断微信是否安装
-	 */
-	public static boolean isWeixinAvilible(Context context) {
-		final PackageManager packageManager = context.getPackageManager();
-		List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-		if (pinfo != null) {
-			for (int i = 0; i < pinfo.size(); i++) {
-				String pn = pinfo.get(i).packageName;
-				if (pn.equals("com.tencent.mm")) {
-					return true;
-				}
-			}
-		}
-		return false;
+	public void bind(String openid, String type, String nickName, String logo, String mobile, String verifyCode, String platform) {
+		RetrofitSerciveFactory.provideComService().bindQqWechat(openid,type,nickName,logo,mobile,verifyCode,platform)
+				.lift(new BindPrssenterOpterator<HttpMjResult< UserEntity>>(this))
+				.compose(RxUtil.<HttpMjResult< UserEntity>>applySchedulersForRetrofit())
+				.map(new HttpMjEntityFun< UserEntity>())
+				.subscribe(new BaseSubscriber<UserEntity>(this.mView) {
+					@Override
+					public void onNext(UserEntity entity) {
+						super.onNext(entity);
+						setLoginUserInfo(entity);
+					}
+				});
 	}
 
 	private void setLoginUserInfo(UserEntity entity){
@@ -84,4 +79,5 @@ public class BindPhonePresenter extends AbstractBasePresenter<BindPhoneContract.
 		});
 			mView.loginSuccess();
 	}
+
 }

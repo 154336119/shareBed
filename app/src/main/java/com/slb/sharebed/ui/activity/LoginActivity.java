@@ -1,6 +1,7 @@
 package com.slb.sharebed.ui.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -10,11 +11,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.jaeger.library.StatusBarUtil;
 import com.slb.frame.ui.activity.BaseMvpActivity;
 import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.Base;
 import com.slb.sharebed.R;
+import com.slb.sharebed.event.FinishAcitivtyEvent;
+import com.slb.sharebed.event.RefreshUserInfoEvent;
 import com.slb.sharebed.ui.contract.LoginContract;
 import com.slb.sharebed.ui.presenter.LoginPresenter;
 import com.slb.sharebed.weight.CountTimerButton;
@@ -22,6 +26,7 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareConfig;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -92,7 +97,7 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginCon
         return R.layout.activity_login;
     }
 
-    @OnClick({R.id.BtnGetCode, R.id.btnLogin, R.id.TvWxLogin})
+    @OnClick({R.id.BtnGetCode, R.id.btnLogin, R.id.TvWxLogin, R.id.TvQQLogin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.BtnGetCode:
@@ -124,5 +129,24 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginCon
     @PermissionRequestFailedCallback
     private void failed(String[] failedPermissions) {
         showToastMsg("获取权限失败，操作无法完成");
+    }
+
+    @Override
+    public void toBindPhonePage(Map<String,String> map) {
+        Bundle bundle = new Bundle();
+        bundle.putString("openid",map.get("uid"));
+        bundle.putString("type",map.get("platform"));
+        bundle.putString("nickName",map.get("name"));
+        bundle.putString("iconurl", map.get("iconurl"));
+        ActivityUtil.next(this,BindPhoneActivity.class,bundle,false);
+    }
+
+    @Override
+    protected boolean rxBusRegist() {
+        return true;
+    }
+    @Subscribe
+    public void onFinishAcitivtyEvent(FinishAcitivtyEvent event) {
+        finish();
     }
 }

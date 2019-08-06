@@ -53,19 +53,26 @@ public class SecurityDialog extends BottomSheetDialogFragment {
 //
         if (Base.getUserEntity().getIsIdentified() == 1) {
             //已实名认证
-            ((TextView)view.findViewById(R.id.TvAuth)).setText("已认证");
+            ((TextView)view.findViewById(R.id.TvAuth)).setText("已提交待审核");
+        }else if(Base.getUserEntity().getIsIdentified() == 2){
+            ((TextView)view.findViewById(R.id.TvAuth)).setText("认证不通过");
         }else if(Base.getUserEntity().getIsIdentified() == 3){
-            ((TextView)view.findViewById(R.id.TvAuth)).setText("提交审核");
-        }else{
+            ((TextView)view.findViewById(R.id.TvAuth)).setText("审核通过已认证");
+        } else {
             //未实名认证
+            ((TextView)view.findViewById(R.id.TvAuth)).setText("未认证");
+        }
+
+        if (Base.getUserEntity().getIsIdentified() == 0 || Base.getUserEntity().getIsIdentified() == 2) {
+            //未实名认证或认证失败
             view.findViewById(R.id.RlAuth).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
                             + Base.getUserEntity().getToken());
-                    bundle.putString("title","实名认证");
-                    ActivityUtil.next(getActivity(),WebViewActivity.class,bundle,false);
+                    bundle.putString("title", "实名认证");
+                    ActivityUtil.next(getActivity(), WebViewActivity.class, bundle, false);
                     dialog.cancel();
                 }
             });

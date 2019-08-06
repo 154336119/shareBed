@@ -42,11 +42,14 @@ public class AccountSecurityActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        //认证：0未认证、1已提交待审核、2认证不通过、3审核通过已认证
         if (Base.getUserEntity().getIsIdentified() == 1) {
             //已实名认证
-            TvAuthState.setText("已认证");
+            TvAuthState.setText("已提交待审核");
+        }else if(Base.getUserEntity().getIsIdentified() == 2){
+            TvAuthState.setText("认证不通过");
         }else if(Base.getUserEntity().getIsIdentified() == 3){
-            TvAuthState.setText("提交审核");
+            TvAuthState.setText("审核通过已认证");
         } else {
             //未实名认证
             TvAuthState.setText("未认证");
@@ -62,7 +65,7 @@ public class AccountSecurityActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         switch (view.getId()) {
             case R.id.RlAuth:
-                if (Base.getUserEntity().getIsIdentified() == 0) {
+                if (Base.getUserEntity().getIsIdentified() == 0 || Base.getUserEntity().getIsIdentified() == 2) {
                     bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
                             + Base.getUserEntity().getToken());
                     bundle.putString("title","实名认证");

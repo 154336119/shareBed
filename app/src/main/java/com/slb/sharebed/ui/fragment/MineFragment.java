@@ -95,17 +95,17 @@ public class MineFragment
 
 
         //实名认证
-        if(Base.getUserEntity().getIsIdentified()!=1){
+        if(Base.getUserEntity().getIsIdentified() == 0 || Base.getUserEntity().getIsIdentified() ==2){
             IvAuthState.setImageResource(R.mipmap.qurenzheng);
         }else{
             IvAuthState.setImageResource(R.mipmap.yirenzheng);
         }
 
         //押金状态
-        if(Base.getUserEntity().getIsIdentified() == 1){
-            IvAuthState.setImageResource(R.mipmap.yirenzheng);
+        if(Base.getUserEntity().getIsDeposit() == 1){
+            IvNoDeposit.setVisibility(View.GONE);
         }else{
-            IvAuthState.setImageResource(R.mipmap.qurenzheng);
+            IvNoDeposit.setVisibility(View.VISIBLE);
         }
         return rootView;
     }
@@ -127,7 +127,7 @@ public class MineFragment
         Bundle bundle = new Bundle();
         switch (view.getId()) {
             case R.id.IvAuthState:
-                if(Base.getUserEntity().getIsIdentified()==0){
+                if(Base.getUserEntity().getIsIdentified()==0 || Base.getUserEntity().getIsIdentified()==2){
                     bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
                             + Base.getUserEntity().getToken());
                     bundle.putString("title","实名认证");
@@ -174,11 +174,13 @@ public class MineFragment
                         }else{
                             IvNoDeposit.setVisibility(View.VISIBLE);
                         }
-                        if(entity.getIsIdentified() == 1){
-                            IvAuthState.setImageResource(R.mipmap.yirenzheng);
-                        }else{
+                        if(entity.getIsIdentified() == 0 || entity.getIsIdentified() ==2){
                             IvAuthState.setImageResource(R.mipmap.qurenzheng);
+                        }else{
+                            IvAuthState.setImageResource(R.mipmap.yirenzheng);
                         }
+
+
                     }
                 });
     }

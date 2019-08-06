@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.slb.sharebed"
     android:testOnly="true">
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -88,6 +89,14 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.slb.sharebed.ui.activity.LockSuccessActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.slb.sharebed.ui.activity.AboutUsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.slb.sharebed.ui.activity.AccountSecurityActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
         <activity

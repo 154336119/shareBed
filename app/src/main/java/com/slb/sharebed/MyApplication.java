@@ -39,8 +39,9 @@ public class MyApplication extends Application{
     }
 
     private void initShare() {
-        UMConfigure.init(this, "5cee3747570df3fbb3001003", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "c03143546167352f2e2de6ee1c0dda3e");
-        PlatformConfig.setWeixin(MyConstants.WX_APP_ID, "f209badd4ead402cc20a395724325284");
+        UMConfigure.init(this, "5d2eee2e3fc195b868000de0", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "8dcb97bf453703a453fc66cb7d3d90a8");
+        PlatformConfig.setWeixin(MyConstants.WX_APP_ID, "294c754391bee3b1c67642865d6dafb0");
+        PlatformConfig.setQQZone("101748487", "eebbbbd96974f2af7b058025c6cd3386");
         PushAgent mPushAgent = PushAgent.getInstance(this);
 //注册推送服务，每次调用register方法都会回调该接口
         mPushAgent.register(new IUmengRegisterCallback() {
