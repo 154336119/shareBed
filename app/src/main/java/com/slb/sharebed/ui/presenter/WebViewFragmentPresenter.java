@@ -2,6 +2,7 @@ package com.slb.sharebed.ui.presenter;
 
 import com.slb.frame.ui.presenter.AbstractBaseFragmentPresenter;
 import com.slb.frame.ui.presenter.AbstractBasePresenter;
+import com.slb.sharebed.http.RetrofitSerciveFactory;
 import com.slb.sharebed.ui.contract.WebViewContract;
 import com.slb.sharebed.ui.contract.WebViewFragmentContract;
 

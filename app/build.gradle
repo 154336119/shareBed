@@ -17,7 +17,7 @@ android {
         versionCode 14
         versionName "1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-//        manifestPlaceholders = [qqappid: "123123213"]
+        manifestPlaceholders = [qqappid: "101748487"]
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86"
         }
@@ -81,6 +81,7 @@ dependencies {
     compile  'com.umeng.umsdk:common:1.5.4'
     compile 'com.umeng.umsdk:share-core:6.9.4'
     compile 'com.umeng.umsdk:share-wx:6.9.4'
+    compile 'com.umeng.umsdk:share-qq:6.9.4'
     compile 'com.umeng.umsdk:utdid:1.1.5.3'
     //PushSDK
     implementation 'com.umeng.umsdk:push:5.0.2'

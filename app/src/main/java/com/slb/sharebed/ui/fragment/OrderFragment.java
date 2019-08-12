@@ -406,14 +406,14 @@ public class OrderFragment extends BaseMvpFragment<WebViewFragmentContract.IView
 //        return super.onKeyDown(keyCode, event);
 //    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mWebView == null) {
-            return;
-        }
-        mWebView.onPause();
-    }
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        if (mWebView == null) {
+//            return;
+//        }
+//        mWebView.onPause();
+//    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

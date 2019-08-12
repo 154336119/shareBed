@@ -58,7 +58,7 @@ public class MyConstants {
     /**
      * 新增紧急联系人
      */
-    public static final String url_addLinkman = "/addLinkman";
+    public static final String url_addLinkman = "/addLinkman?token=";
     /**
      * 修改紧急联系人
      */

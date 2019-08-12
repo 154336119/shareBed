@@ -104,5 +104,25 @@
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/ActivityDialogStyle"
             android:screenOrientation="portrait"/>
+        <!-- 友盟QQ配置文件-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent101473285" />
+            </intent-filter>
+        </activity>
+
+        <!-- 友盟QQ配置文件 -->
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 </manifest>

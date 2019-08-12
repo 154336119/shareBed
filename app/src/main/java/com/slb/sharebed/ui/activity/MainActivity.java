@@ -75,7 +75,7 @@ public class MainActivity extends BaseMvpActivity<MainContract.IView, MainContra
         if (savedInstanceState == null) {
             mFragments[HOME_HOME] = HomeFragment.newInstance();
             mFragments[HOME_ORDER] = OrderFragment.newInstance();
-            mFragments[HOME_MONEY] = CopyMoneyFragment.newInstance();
+            mFragments[HOME_MONEY] = MoneyFragment.newInstance();
             mFragments[HOME_MINE] = MineFragment.newInstance();
             loadMultipleRootFragment(R.id.mainFrame, HOME_HOME,
                     mFragments[HOME_HOME],

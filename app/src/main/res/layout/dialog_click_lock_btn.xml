@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_131313"
+        android:text="请按门锁旁边的开关按钮\n完成床位解锁，如果30秒内未按开源床位将自动锁定"
+        android:drawableTop="@mipmap/ankaiguan"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:drawablePadding="15dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:paddingTop="@dimen/dp_40"
+        android:paddingBottom="@dimen/dp_40"
+        android:paddingLeft="@dimen/distance_20"
+        android:paddingRight="@dimen/distance_20"
+    android:background="@drawable/bg_dialog"
+        android:textSize="18sp"/>

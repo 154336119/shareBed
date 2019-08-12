@@ -1,7 +1,9 @@
 package com.slb.sharebed.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -65,14 +67,13 @@ public class AccountSecurityActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         switch (view.getId()) {
             case R.id.RlAuth:
-                if (Base.getUserEntity().getIsIdentified() == 0 || Base.getUserEntity().getIsIdentified() == 2) {
-                    bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
-                            + Base.getUserEntity().getToken());
-                    bundle.putString("title","实名认证");
-                    ActivityUtil.next(this, WebViewActivity.class,bundle,false);
-                }
+                clickAuth();
                 break;
             case R.id.RlChangePhone:
+//                bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
+//                        + Base.getUserEntity().getToken());
+//                bundle.putString("title", "实名认证");
+//                ActivityUtil.next(this, WebViewActivity.class, bundle, false);
                 break;
             case R.id.TvLoginOut:
                 PushAgent mPushAgent = PushAgent.getInstance(this);
@@ -114,5 +115,36 @@ public class AccountSecurityActivity extends BaseActivity {
             }
         }
         return str;
+    }
+
+      private void clickAuth(){
+        if (Base.getUserEntity().getIsIdentified() == 0 || Base.getUserEntity().getIsIdentified() == 2) {
+            //未实名认证或认证失败
+            Bundle bundle = new Bundle();
+            bundle.putString("url", MyConstants.h5Url + MyConstants.url_certification
+                    + Base.getUserEntity().getToken());
+            bundle.putString("title", "实名认证");
+            ActivityUtil.next(this, WebViewActivity.class, bundle, false);
+        }else if(Base.getUserEntity().getIsIdentified() == 1){
+            //审核中
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("您的实名还在认证中，请与审核通过之后再进行使用");
+            builder.setTitle("温馨提示");
+            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builder.create().show();
+        }else if(Base.getUserEntity().getIsIdentified() == 3){
+            //审核已通过
+            Bundle bundle = new Bundle();
+            bundle.putString("url", MyConstants.h5Url + MyConstants.url_subSucc1
+                    + Base.getUserEntity().getToken());
+            bundle.putString("title", "实名认证");
+            ActivityUtil.next(this, WebViewActivity.class, bundle, false);
+        }
     }
 }

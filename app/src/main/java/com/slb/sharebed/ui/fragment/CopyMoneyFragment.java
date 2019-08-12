@@ -408,10 +408,10 @@ public class CopyMoneyFragment extends BaseMvpFragment<WebViewFragmentContract.I
     @Override
     public void onPause() {
         super.onPause();
-        if (mWebView == null) {
-            return;
-        }
-        mWebView.onPause();
+//        if (mWebView == null) {
+//            return;
+//        }
+//        mWebView.onPause();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -597,18 +597,18 @@ public class CopyMoneyFragment extends BaseMvpFragment<WebViewFragmentContract.I
         }
     }
 
-//    @Override
-//    public void onHiddenChanged(boolean hidden) {
-//        super.onHiddenChanged(hidden);
-//        if (!hidden) {
-//            mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_wallet + Base.getUserEntity().getToken());
-//        }
-//    }
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        if(isVisibleToUser){
-//            mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_wallet + Base.getUserEntity().getToken());
-//        }
-//    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_wallet + Base.getUserEntity().getToken());
+        }
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        if(isVisibleToUser){
+            mWebView.loadUrl(MyConstants.h5Url + MyConstants.url_wallet + Base.getUserEntity().getToken());
+        }
+    }
 }
 

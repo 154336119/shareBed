@@ -113,7 +113,6 @@
             android:focusable="true"
             android:textColor="@color/color_131313"
             android:inputType="number"
-            android:maxLines="1"
             android:layout_height="wrap_content"
             style="@style/btn_bottom_stroke"/>
         <ImageView

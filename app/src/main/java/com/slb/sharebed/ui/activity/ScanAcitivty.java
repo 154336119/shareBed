@@ -5,11 +5,18 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Vibrator;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -65,6 +72,22 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
     private boolean mIsBtnBack = false;
     private int rootBottom = Integer.MIN_VALUE;
     KeyBoardChangeListener keyBoardChangeListener;
+    private AlertDialog  alertDialog;
+    private int httpNum = 0;
+    private String mBedCode;
+    private Handler handler  = new Handler(new Handler.Callback(){
+        @Override
+        public boolean handleMessage(Message msg) {
+            httpNum++;
+            if(httpNum == 4){
+                openFailed();
+            }else{
+                mPresenter.beadOpen(mBedCode);
+            }
+//            httpGetPayStatus();
+            return true;
+        }
+    });;
     private ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
         public void onGlobalLayout() {
@@ -116,6 +139,8 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
                 }
             }
         });
+        EtInput.setText("359689091311701");
+//        showClickOpenTipsDialog();
     }
 
 
@@ -125,7 +150,6 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
 
         mZXingView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
 //        mZXingView.startCamera(Camera.CameraInfo.CAMERA_FACING_FRONT); // 打开前置摄像头开始预览，但是并未开始识别
-
         mZXingView.startSpotAndShowRect(); // 显示扫描框，并开始识别
     }
 
@@ -134,6 +158,7 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
         mZXingView.stopCamera(); // 关闭摄像头预览，并且隐藏扫描框
         super.onStop();
     }
+
 
     @Override
     protected void onDestroy() {
@@ -156,8 +181,9 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
     @Override
     public void onScanQRCodeSuccess(String result) {
         Log.i(TAG, "result:" + result);
+        mBedCode = result;
         vibrate();
-        mPresenter.beadOpen(result);
+        mPresenter.beadOpen(mBedCode);
         mZXingView.startSpot(); // 开始识别
     }
 
@@ -180,7 +206,8 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.BtnUsedBed:
-                mPresenter.beadOpen(EtInput.getText().toString());
+                mBedCode = EtInput.getText().toString();
+                mPresenter.beadOpen(mBedCode);
                 break;
             case R.id.BtnScanCode:
                 Animation animBottomOut = AnimationUtils.loadAnimation(ScanAcitivty.this,
@@ -238,13 +265,45 @@ public class ScanAcitivty  extends BaseMvpActivity<ScanContract.IView, ScanContr
 
     @Override
     public void openSuccess() {
+        dismissDialog();
         RxBus.get().post(new BedOpenEvent());
         ActivityUtil.next(this,LockSuccessActivity.class,null,true);
     }
 
     @Override
     public void openFailed() {
+        mBedCode = null;
+        dismissDialog();
         ActivityUtil.next(this,LockFaildDialogAcitivty.class);
+    }
+
+    @Override
+    public void showClickOpenTipsDialog() {
+        if (alertDialog == null) {
+            View view = LayoutInflater.from(this).inflate(R.layout.dialog_click_lock_btn, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.MyDialogStyle);
+            alertDialog =builder.setView(view).setCancelable(false).create();
+            Window window = alertDialog.getWindow();
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(layoutParams);
+            window.setGravity(Gravity.CENTER);
+            alertDialog.setContentView(view);
+        }
+        alertDialog.show();
+    }
+
+
+    private void dismissDialog() {
+        if (alertDialog != null && alertDialog.isShowing()) {
+            alertDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void openIng() {
+        handler.sendEmptyMessageDelayed(0,3000);
     }
 }
 

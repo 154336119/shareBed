@@ -103,6 +103,7 @@ public class LoginPresenter extends AbstractBasePresenter<LoginContract.IView>
 
 							@Override
 							public void onError(Throwable e) {
+								super.onError(e);
 								if (e.getMessage().equals("账号不存在")){
 									map.put("platform",params.get("platform"));
 									mView.toBindPhonePage(map);

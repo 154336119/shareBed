@@ -2,6 +2,7 @@ package com.slb.sharebed.ui.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.jaeger.library.StatusBarUtil;
+import com.orhanobut.logger.Logger;
 import com.slb.frame.ui.activity.BaseMvpActivity;
 import com.slb.frame.utils.ActivityUtil;
 import com.slb.sharebed.Base;
@@ -22,6 +24,10 @@ import com.slb.sharebed.event.RefreshUserInfoEvent;
 import com.slb.sharebed.ui.contract.LoginContract;
 import com.slb.sharebed.ui.presenter.LoginPresenter;
 import com.slb.sharebed.weight.CountTimerButton;
+import com.tencent.connect.common.Constants;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareConfig;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -149,4 +155,27 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.IView, LoginCon
     public void onFinishAcitivtyEvent(FinishAcitivtyEvent event) {
         finish();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //必须有这句代码，不然不会回调。。。。。。然而，官方文档上，并没有这句代码
+        Tencent.onActivityResultData(requestCode, resultCode, data, new IUiListener() {
+            @Override
+            public void onComplete(Object o) {
+                Logger.d("onComplete");
+            }
+
+            @Override
+            public void onError(UiError uiError) {
+                Logger.d("onError");
+            }
+
+            @Override
+            public void onCancel() {
+                Logger.d("onCancel");
+            }
+        });
+
+    }
+
 }

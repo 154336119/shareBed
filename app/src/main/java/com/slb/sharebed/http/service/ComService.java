@@ -1,6 +1,7 @@
 package com.slb.sharebed.http.service;
 
 import com.slb.sharebed.http.bean.BedQueryEntity;
+import com.slb.sharebed.http.bean.BedStateEntity;
 import com.slb.sharebed.http.bean.ConfigEntity;
 import com.slb.sharebed.http.bean.ContactBean;
 import com.slb.sharebed.http.bean.OrderFeeDetailEntity;
@@ -136,4 +137,13 @@ public interface ComService {
     Observable<HttpMjResult<UserEntity>> bindQqWechat(@Field("openid") String openid,@Field("type") String type
     ,@Field("nickName") String nickName,@Field("logo") String logo ,@Field("mobile") String mobile,@Field("verifyCode") String verifyCode
     ,@Field("platform") String platform);
+
+
+
+    /**
+     *  开锁状态查询
+     */
+    @FormUrlEncoded
+    @POST("/app/bed/open/queryState" )
+    Observable<HttpMjResult<BedStateEntity>> bedOpenQueryState(@Field("token") String token);
 }

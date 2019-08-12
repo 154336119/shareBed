@@ -28,7 +28,7 @@
             <RadioButton
                 android:id="@+id/rb_home"
                 android:drawableTop="@drawable/slt_main_bottom_home"
-                android:text="首页"
+                android:text="用床"
                 style="@style/tab_bottom"/>
             <RadioButton
                 android:id="@+id/rb_order"

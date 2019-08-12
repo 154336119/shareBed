@@ -2,7 +2,9 @@ package com.slb.sharebed.ui.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -88,7 +90,7 @@ public class WebViewActivity  extends BaseMvpActivity<WebViewContract.IView, Web
     WebView mWebView;
     @BindView(R.id.progressbar)
     ProgressBar progressbar;
-
+    int FILE_CHOOSER_RESULT_CODE = 100;
     private String url;
     private String title;
     private int isShare = 0;
@@ -98,6 +100,8 @@ public class WebViewActivity  extends BaseMvpActivity<WebViewContract.IView, Web
     private String mOrderCode;
     private static final int SDK_PAY_FLAG = 1;
 
+    ValueCallback<Uri> uploadMessage;
+    ValueCallback<Uri[]> uploadMessageAboveL;
     @Override
     public WebViewContract.IPresenter initPresenter() {
         return new WebViewPresenter();
@@ -237,6 +241,8 @@ public class WebViewActivity  extends BaseMvpActivity<WebViewContract.IView, Web
 
         mWebView.setLongClickable(true);
         mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
+
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -305,6 +311,31 @@ public class WebViewActivity  extends BaseMvpActivity<WebViewContract.IView, Web
                     progressbar.setVisibility(View.VISIBLE);
                 }
             }
+
+            @Override
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+//                return super.onShowFileChooser(webView, filePathCallback, fileChooserParams);
+                uploadMessageAboveL = filePathCallback;
+                selectImage();
+                return true;
+            }
+            public void openFileChooser(ValueCallback<Uri> valueCallback) {
+                uploadMessage = valueCallback;
+                selectImage();
+            }
+
+            // For Android  >= 3.0
+            public void openFileChooser(ValueCallback valueCallback, String acceptType) {
+                uploadMessage = valueCallback;
+                selectImage();
+            }
+
+            //For Android  >= 4.1
+            public void openFileChooser(ValueCallback<Uri> valueCallback, String acceptType,  String capture) {
+                uploadMessage = valueCallback;
+                selectImage();
+            }
+
         });
         mWebView.addJavascriptInterface(new JavaScriptObject(), "jsAndroid");
         mWebView.loadUrl(url);
@@ -449,31 +480,68 @@ public class WebViewActivity  extends BaseMvpActivity<WebViewContract.IView, Web
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 //        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, intent);
-        if (resultCode == 100){
-            if (intent.getBooleanExtra("isRefresh", false)){
-                StringBuffer sb = new StringBuffer();
-                sb.append(this.url);
-                if(!TextUtils.isEmpty(intent.getStringExtra("type"))){
-                    sb.append("&type="+intent.getStringExtra("type"));
-                }
-                if(!TextUtils.isEmpty(intent.getStringExtra("addressId"))){
-                    sb.append("&addressId="+intent.getStringExtra("addressId"));
-                }
-                //发票数据
-                if(!TextUtils.isEmpty(intent.getStringExtra("invoiceType"))){
-                    sb.append("&invoiceType="+intent.getStringExtra("invoiceType"));
-                }
-                if(!TextUtils.isEmpty(intent.getStringExtra("invoiceTitle"))){
-                    sb.append("&invoiceTitle="+intent.getStringExtra("invoiceTitle"));
-                }
-                if(!TextUtils.isEmpty(intent.getStringExtra("invoiceTax"))){
-                    sb.append("&invoiceTax="+intent.getStringExtra("invoiceTax"));
-                }
+        if (requestCode == FILE_CHOOSER_RESULT_CODE) {
+            //上传图片
+            if (null == uploadMessage && null == uploadMessageAboveL) return;
+            Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
+            if (uploadMessageAboveL != null) {
+                onActivityResultAboveL(requestCode, resultCode, intent);
+            } else if (uploadMessage != null) {
+                uploadMessage.onReceiveValue(result);
+                uploadMessage = null;
+            }
+
+        }else {
+            if (resultCode == 100){
+                if (intent.getBooleanExtra("isRefresh", false)){
+                    StringBuffer sb = new StringBuffer();
+                    sb.append(this.url);
+                    if(!TextUtils.isEmpty(intent.getStringExtra("type"))){
+                        sb.append("&type="+intent.getStringExtra("type"));
+                    }
+                    if(!TextUtils.isEmpty(intent.getStringExtra("addressId"))){
+                        sb.append("&addressId="+intent.getStringExtra("addressId"));
+                    }
+                    //发票数据
+                    if(!TextUtils.isEmpty(intent.getStringExtra("invoiceType"))){
+                        sb.append("&invoiceType="+intent.getStringExtra("invoiceType"));
+                    }
+                    if(!TextUtils.isEmpty(intent.getStringExtra("invoiceTitle"))){
+                        sb.append("&invoiceTitle="+intent.getStringExtra("invoiceTitle"));
+                    }
+                    if(!TextUtils.isEmpty(intent.getStringExtra("invoiceTax"))){
+                        sb.append("&invoiceTax="+intent.getStringExtra("invoiceTax"));
+                    }
 //                this.url = sb.toString();
-                mWebView.loadUrl(sb.toString());
+                    mWebView.loadUrl(sb.toString());
+                }
             }
         }
     }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void onActivityResultAboveL(int requestCode, int resultCode, Intent intent) {
+        if (requestCode != FILE_CHOOSER_RESULT_CODE || uploadMessageAboveL == null)
+            return;
+        Uri[] results = null;
+        if (resultCode == Activity.RESULT_OK) {
+            if (intent != null) {
+                String dataString = intent.getDataString();
+                ClipData clipData = intent.getClipData();
+                if (clipData != null) {
+                    results = new Uri[clipData.getItemCount()];
+                    for (int i = 0; i < clipData.getItemCount(); i++) {
+                        ClipData.Item item = clipData.getItemAt(i);
+                        results[i] = item.getUri();
+                    }
+                }
+                if (dataString != null)
+                    results = new Uri[]{Uri.parse(dataString)};
+            }
+        }
+        uploadMessageAboveL.onReceiveValue(results);
+        uploadMessageAboveL = null;
+    }
+
 //
 //    /**
 //     * 测试
@@ -626,6 +694,19 @@ public class WebViewActivity  extends BaseMvpActivity<WebViewContract.IView, Web
             payAli(entity.payUrl);
         } else {
             payWx(entity);
+        }
+    }
+
+    private void selectImage() {
+        Intent intent;
+        if (Build.VERSION.SDK_INT < 19) {
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+        } else {
+            intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent wrapperIntent = Intent.createChooser(intent, null);
+            //REQ_CHOOSE是定义的一个常量
+            startActivityForResult(wrapperIntent, FILE_CHOOSER_RESULT_CODE);
         }
     }
 }
